@@ -40,9 +40,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':ultimateFram')
-    compile files('libs/zypos1.8.jar')
-    compile files('libs/IdCardUartLib.jar')
-    compile files('libs/core.jar')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.mxn.soul:flowingdrawer-core:2.0.0'

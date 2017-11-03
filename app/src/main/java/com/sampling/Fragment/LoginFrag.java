@@ -50,6 +50,7 @@ public class LoginFrag extends UltimateNetFrag {
     public void onConnError(String result, int flag, Object... tag) {
         if (iosProgressDialog.isShowing()) {
             iosProgressDialog.dismiss();
+            toast("请检查网络连接");
         }
     }
 
