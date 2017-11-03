@@ -2,10 +2,6 @@ package com.sampling;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.posapi.PosApi;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.bill.ultimatefram.app.UltimateApplication;
 import com.bill.ultimatefram.util.ExternalFileHelper;

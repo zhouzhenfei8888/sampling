@@ -2,7 +2,6 @@ package com.sampling.Fragment;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.posapi.PosApi;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
