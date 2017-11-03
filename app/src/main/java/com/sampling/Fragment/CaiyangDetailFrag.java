@@ -29,6 +29,7 @@ import com.bill.ultimatefram.view.listview.adapter.Holder;
 import com.sampling.App;
 import com.sampling.Beans.SamplingBean;
 import com.sampling.Common.BarcodeCreater;
+import com.sampling.Common.BitmapTools;
 import com.sampling.R;
 import com.sampling.dao.DaoSession;
 import com.sampling.dao.SamplingBeanDao;
@@ -161,11 +162,13 @@ public class CaiyangDetailFrag extends UltimateFragment {
                         sb.append("来源产地：" + samplingBean.getCandi());
                         sb.append("\n");
                         sb.append("\n");
-                        if(woyouService != null){
+                        if (woyouService != null) {
                             try {
-                                woyouService.setAlignment(0,null);
-                                woyouService.printText(sb.toString(),callback);
-                                woyouService.lineWrap(1,null);
+                                woyouService.setAlignment(0, null);
+                                woyouService.printText(sb.toString(), callback);
+                                woyouService.setAlignment(1, null);
+                                woyouService.printQRCode(samplingBean.getCaiyanno(), 5, 2, null);
+                                woyouService.lineWrap(3, null);
                             } catch (RemoteException e) {
                                 e.printStackTrace();
                             }
