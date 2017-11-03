@@ -1,0 +1,568 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": [
+    {
+      "children": [
+        {
+          "title": "小麦粉",
+          "value": "1.1"
+        },
+        {
+          "title": "大米",
+          "value": "1.2"
+        },
+        {
+          "title": "挂面",
+          "value": "1.3"
+        },
+        {
+          "title": "其他粮食加工品",
+          "value": "1.4"
+        }
+      ],
+      "title": "粮食加工品",
+      "value": "1"
+    },
+    {
+      "children": [
+        {
+          "title": "食用植物油",
+          "value": "2.1"
+        },
+        {
+          "title": "食用动物油脂",
+          "value": "2.2"
+        },
+        {
+          "title": "食用油脂制品",
+          "value": "2.3"
+        }
+      ],
+      "title": "食用油、油脂及其制品",
+      "value": "2"
+    },
+    {
+      "children": [
+        {
+          "title": "酱油",
+          "value": "3.1"
+        },
+        {
+          "title": "食醋",
+          "value": "3.2"
+        },
+        {
+          "title": "酱类",
+          "value": "3.3"
+        },
+        {
+          "title": "调味料酒",
+          "value": "3.4"
+        },
+        {
+          "title": "香辛料类",
+          "value": "3.5"
+        },
+        {
+          "title": "固体复合调味料",
+          "value": "3.6"
+        },
+        {
+          "title": "半固体复合调味料",
+          "value": "3.7"
+        },
+        {
+          "title": "液体复合调味料",
+          "value": "3.8"
+        },
+        {
+          "title": "味精",
+          "value": "3.9"
+        }
+      ],
+      "title": "调味品",
+      "value": "3"
+    },
+    {
+      "children": [
+        {
+          "title": "预制肉制品",
+          "value": "4.1"
+        },
+        {
+          "title": "熟肉制品",
+          "value": "4.2"
+        },
+        {
+          "title": "其他肉制品",
+          "value": "4.3"
+        }
+      ],
+      "title": "肉制品",
+      "value": "4"
+    },
+    {
+      "children": [
+        {
+          "title": "液体乳",
+          "value": "5.1"
+        },
+        {
+          "title": "乳粉",
+          "value": "5.2"
+        },
+        {
+          "title": "乳清粉和乳清蛋白粉",
+          "value": "5.3"
+        },
+        {
+          "title": "其他乳制品",
+          "value": "5.4"
+        }
+      ],
+      "title": "乳制品",
+      "value": "5"
+    },
+    {
+      "children": [
+        {
+          "title": "瓶（桶）装饮用水",
+          "value": "6.1"
+        },
+        {
+          "title": "果、蔬汁饮料",
+          "value": "6.2"
+        },
+        {
+          "title": "蛋白饮料",
+          "value": "6.3"
+        },
+        {
+          "title": "碳酸饮料（汽水）",
+          "value": "6.4"
+        },
+        {
+          "title": "茶饮料",
+          "value": "6.5"
+        },
+        {
+          "title": "固体饮料",
+          "value": "6.6"
+        },
+        {
+          "title": "其他饮料",
+          "value": "6.7"
+        }
+      ],
+      "title": "饮料",
+      "value": "6"
+    },
+    {
+      "children": [
+        {
+          "title": "方便食品",
+          "value": "7.1"
+        }
+      ],
+      "title": "方便食品",
+      "value": "7"
+    },
+    {
+      "children": [
+        {
+          "title": "饼干",
+          "value": "8.1"
+        }
+      ],
+      "title": "饼干",
+      "value": "8"
+    },
+    {
+      "children": [
+        {
+          "title": "罐头",
+          "value": "9.1"
+        }
+      ],
+      "title": "罐头",
+      "value": "9"
+    },
+    {
+      "children": [
+        {
+          "title": "冷冻饮品",
+          "value": "10.1"
+        }
+      ],
+      "title": "冷冻饮品",
+      "value": "10"
+    },
+    {
+      "children": [
+        {
+          "title": "速冻面米食品",
+          "value": "11.1"
+        },
+        {
+          "title": "速冻谷物食品",
+          "value": "11.2"
+        },
+        {
+          "title": "速冻肉制品",
+          "value": "11.3"
+        },
+        {
+          "title": "速冻水产制品",
+          "value": "11.4"
+        },
+        {
+          "title": "速冻蔬菜制品",
+          "value": "11.5"
+        },
+        {
+          "title": "速冻水果制品",
+          "value": "11.6"
+        }
+      ],
+      "title": "速冻食品",
+      "value": "11"
+    },
+    {
+      "children": [
+        {
+          "title": "膨化食品",
+          "value": "12.1"
+        },
+        {
+          "title": "薯类食品",
+          "value": "12.2"
+        }
+      ],
+      "title": "薯类及膨化食品",
+      "value": "12"
+    },
+    {
+      "children": [
+        {
+          "title": "糖果",
+          "value": "13.1"
+        },
+        {
+          "title": "巧克力及巧克力制品",
+          "value": "13.2"
+        },
+        {
+          "title": "果冻",
+          "value": "13.3"
+        }
+      ],
+      "title": "糖果制品",
+      "value": "13"
+    },
+    {
+      "children": [
+        {
+          "title": "茶叶",
+          "value": "14.1"
+        },
+        {
+          "title": "含茶制品和代用茶",
+          "value": "14.2"
+        }
+      ],
+      "title": "茶叶及相关制品",
+      "value": "14"
+    },
+    {
+      "children": [
+        {
+          "title": "白酒",
+          "value": "15.1"
+        },
+        {
+          "title": "黄酒",
+          "value": "15.2"
+        },
+        {
+          "title": "啤酒",
+          "value": "15.3"
+        },
+        {
+          "title": "葡萄酒",
+          "value": "15.4"
+        },
+        {
+          "title": "果酒（发酵型）及其他发酵酒",
+          "value": "15.5"
+        },
+        {
+          "title": "配制酒",
+          "value": "15.6"
+        },
+        {
+          "title": "其他蒸馏酒",
+          "value": "15.7"
+        }
+      ],
+      "title": "酒类",
+      "value": "15"
+    },
+    {
+      "children": [
+        {
+          "title": "蔬菜制品",
+          "value": "16.1"
+        }
+      ],
+      "title": "蔬菜制品",
+      "value": "16"
+    },
+    {
+      "children": [
+        {
+          "title": "水果制品",
+          "value": "17.1"
+        }
+      ],
+      "title": "水果制品",
+      "value": "17"
+    },
+    {
+      "children": [
+        {
+          "title": "炒货食品及坚果制品",
+          "value": "18.1"
+        }
+      ],
+      "title": "炒货食品及坚果制品",
+      "value": "18"
+    },
+    {
+      "children": [
+        {
+          "title": "蛋制品",
+          "value": "19.1"
+        }
+      ],
+      "title": "蛋制品",
+      "value": "19"
+    },
+    {
+      "children": [
+        {
+          "title": "焙烤咖啡",
+          "value": "20.1"
+        },
+        {
+          "title": "可可制品",
+          "value": "20.2"
+        }
+      ],
+      "title": "可可及烘焙咖啡产品",
+      "value": "20"
+    },
+    {
+      "children": [
+        {
+          "title": "食糖",
+          "value": "21.1"
+        }
+      ],
+      "title": "食糖",
+      "value": "21"
+    },
+    {
+      "children": [
+        {
+          "title": "水产制品",
+          "value": "22.1"
+        }
+      ],
+      "title": "水产制品",
+      "value": "22"
+    },
+    {
+      "children": [
+        {
+          "title": "淀粉及淀粉制品",
+          "value": "23.1"
+        }
+      ],
+      "title": "淀粉及淀粉制品",
+      "value": "23"
+    },
+    {
+      "children": [
+        {
+          "title": "糕点",
+          "value": "24.1"
+        },
+        {
+          "title": "月饼",
+          "value": "24.2"
+        },
+        {
+          "title": "粽子",
+          "value": "24.3"
+        }
+      ],
+      "title": "糕点",
+      "value": "24"
+    },
+    {
+      "children": [
+        {
+          "title": "豆制品",
+          "value": "25.1"
+        }
+      ],
+      "title": "豆制品",
+      "value": "25"
+    },
+    {
+      "children": [
+        {
+          "title": "蜂蜜",
+          "value": "26.1"
+        },
+        {
+          "title": "蜂王浆",
+          "value": "26.2"
+        },
+        {
+          "title": "蜂花粉",
+          "value": "26.3"
+        },
+        {
+          "title": "蜂产品制品",
+          "value": "26.4"
+        }
+      ],
+      "title": "蜂产品",
+      "value": "26"
+    },
+    {
+      "children": [
+        {
+          "title": "保健食品",
+          "value": "27.1"
+        }
+      ],
+      "title": "保健食品",
+      "value": "27"
+    },
+    {
+      "children": [
+        {
+          "title": "婴幼儿谷类辅助食品",
+          "value": "28.1"
+        },
+        {
+          "title": "婴幼儿罐装辅助食品",
+          "value": "28.2"
+        },
+        {
+          "title": "辅食营养补充品",
+          "value": "28.3"
+        }
+      ],
+      "title": "特殊膳食食品",
+      "value": "28"
+    },
+    {
+      "children": [
+        {
+          "title": "特殊医学用途配方食品",
+          "value": "29.1"
+        }
+      ],
+      "title": "特殊医学用途配方食品",
+      "value": "29"
+    },
+    {
+      "children": [
+        {
+          "title": "婴幼儿配方食品",
+          "value": "30.1"
+        }
+      ],
+      "title": "婴幼儿配方食品",
+      "value": "30"
+    },
+    {
+      "children": [
+        {
+          "title": "餐饮食品",
+          "value": "31.1"
+        }
+      ],
+      "title": "餐饮食品",
+      "value": "31"
+    },
+    {
+      "children": [
+        {
+          "title": "禽畜肉及副食品",
+          "value": "32.1"
+        },
+        {
+          "title": "蔬菜",
+          "value": "32.2"
+        },
+        {
+          "title": "水产品",
+          "value": "32.3"
+        },
+        {
+          "title": "水果类",
+          "value": "32.4"
+        },
+        {
+          "title": "鲜蛋",
+          "value": "32.5"
+        },
+        {
+          "title": "豆类",
+          "value": "32.6"
+        },
+        {
+          "title": "生干坚果与籽类食品",
+          "value": "32.7"
+        }
+      ],
+      "title": "食用农产品",
+      "value": "32"
+    },
+    {
+      "children": [
+        {
+          "title": "明胶",
+          "value": "33.1"
+        },
+        {
+          "title": "复配食品添加剂",
+          "value": "33.2"
+        },
+        {
+          "title": "食用香精",
+          "value": "33.3"
+        },
+        {
+          "title": "山梨酸钾",
+          "value": "33.4"
+        },
+        {
+          "title": "木糖醇",
+          "value": "33.5"
+        },
+        {
+          "title": "柠檬酸钠",
+          "value": "33.6"
+        }
+      ],
+      "title": "食品添加剂",
+      "value": "33"
+    }
+  ]
+}

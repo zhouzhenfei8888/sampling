@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_form"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_orderno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="任务编号："
+            android:textColor="@color/c_90000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_yangben"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_yangben"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="抽检样本" />
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_xiangmu"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_xiangmu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="抽检项目" />
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_no"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="抽检数量" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_clock"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="发布时间：2017-05-10  |  到期时间：2017-10-18"
+            android:textColor="@color/c_90000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_account"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_order_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="发布人：市检测所"
+            android:textColor="@color/c_90000000" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Sampling</string>
+    <string name="text_left_menu">&#xe699;</string>
+    <string name="text_clock">&#xe6bb;</string>
+    <string name="text_account">&#xe6b8;</string>
+    <string name="text_form">&#xe6a2;</string>
+    <string name="text_yangben">&#xe6c5;</string>
+    <string name="text_xiangmu">&#xe6cb;</string>
+    <string name="text_no">&#xe6ce;</string>
+    <string name="text_add">&#xe6b9;</string>
+    <string name="text_upload">&#xe6ab;</string>
+    <string name="print_complete">打印完成</string>
+    <string name="tips">提示</string>
+    <string name="close">关闭</string>
+    <string name="print_no_paper">没纸了</string>
+    <string name="print_failed">打印失败</string>
+    <string name="print_voltate_low">电压过低</string>
+    <string name="print_voltate_high">电压过高</string>
+    <string name="state_normal">正常</string>
+    <string name="state_no_card">无卡</string>
+    <string name="state_card_error">卡错误</string>
+    <string name="state_fault">故障</string>
+    <string name="state_no_paper">缺纸</string>
+    <string name="readoutUnprotect">解除读写保护</string>
+    <string name="device_power">电源开关</string>
+    <string name="device_power_tip">打开或关闭扫描头电源</string>
+    <string name="scan_mode">扫描模式</string>
+    <string name="scan_mode_tip">切换扫描模式</string>
+    <string name="scan_sound">提示音</string>
+    <string name="scan_sound_tip">扫描时播放提示音</string>
+    <string name="append_enter_key">附加回车键</string>
+    <string name="append_enter_key_tip">扫描到数据后追加回车</string>
+    <string name="device_reset">重置设备</string>
+    <string name="poweroff_auto_reset">关机自动重置</string>
+    <string name="poweroff_auto_reset_tips">关机时自动恢复扫描设备参数</string>
+    <string name="reset_scan_device">重置扫描头</string>
+
+    <string name="psam1_">" psam1:"</string>
+    <string name="psam2">" psam2:"</string>
+    <string name="ic_card">" IC卡"</string>
+    <string name="magnetic_card">" 磁条卡:"</string>
+    <string name="printer">" 打印机:"</string>
+    <string name="pos_serial_no">"pos序列号: "</string>
+    <string name="pos_firmware_version">"pos固件版本: "</string>
+    <string name="get_pos_status_failed">获取状态失败</string>
+    <string name="confirm">确定</string>
+</resources>

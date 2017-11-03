@@ -1,0 +1,4 @@
+preference{
+             UltimatePreferenceHelper.editPreference("userinfo", new String[]{"susername", "spwd", "sessionid"},
+                        new String[]{edName.getText().toString(), edPw.getText().toString(), sessionid});
+}
