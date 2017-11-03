@@ -14,6 +14,7 @@ import com.sampling.dao.DaoSession;
 
 /**
  * Created by zzf on 17-10-23.
+ * lslkdjflsdjfk
  */
 
 public class App extends UltimateApplication {
