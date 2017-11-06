@@ -14,6 +14,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ import woyou.aidlservice.jiuiv5.IWoyouService;
 public class CaiyangDetailFrag extends UltimateFragment {
     TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan;
     EditText edShuliang, edCandi;
+    TextView edMarketName,edBoothNo;
     ImageView ivSign, ivGiveSign;
     RadioGroup mRadioGroup;
     GridView gv;//现场图片添加
@@ -78,6 +80,8 @@ public class CaiyangDetailFrag extends UltimateFragment {
         mRadioGroup = findViewById(R.id.radio_group);
         ivSign = findViewById(R.id.iv_sign);
         ivGiveSign = findViewById(R.id.iv_give_sign);
+        edMarketName = findViewById(R.id.tv_market_name);
+        edBoothNo = findViewById(R.id.tv_booth_no);
         gv = findViewById(R.id.gv_photo);
         getFlexibleBar().setTitle("采样单详情");
         getFlexibleBar().setRightText("打印");
@@ -100,6 +104,8 @@ public class CaiyangDetailFrag extends UltimateFragment {
         tvCaiyangyuan.setText(samplingBean.getUser());
         edShuliang.setText(samplingBean.getCaiyangshuliang());
         edCandi.setText(samplingBean.getCandi());
+        edBoothNo.setText(samplingBean.getTwh());
+        edMarketName.setText(samplingBean.getCscm());
         if (samplingBean.getStrogemethond().equals("常温")) {
             Log.d(TAG, "常温");
             ((RadioButton) findViewById(R.id.radio_normal)).setChecked(true);

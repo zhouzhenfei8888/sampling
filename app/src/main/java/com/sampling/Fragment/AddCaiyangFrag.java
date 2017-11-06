@@ -15,6 +15,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -44,11 +46,15 @@ import com.google.gson.GsonBuilder;
 import com.sampling.Beans.Body;
 import com.sampling.Beans.Child;
 import com.sampling.Beans.ClassifyBean;
+import com.sampling.Beans.JiancheBean;
 import com.sampling.Beans.MethondBean;
 import com.sampling.Beans.OrderInfo;
 import com.sampling.Beans.OrderListBean;
+import com.sampling.Beans.ResponseBean;
 import com.sampling.Beans.SamplingBean;
+import com.sampling.Beans.下属;
 import com.sampling.Beans.抽样方法;
+import com.sampling.Beans.菜市场;
 import com.sampling.Common.CommonInfo;
 import com.sampling.App;
 import com.sampling.R;
@@ -81,7 +87,10 @@ import okio.Okio;
 public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListener, BaiduLocationHelper.OnReceiveLocationListener {
     TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile;
     EditText edShuliang, edCandi;
+    AutoCompleteTextView edMarketName, edBoothNo;
     RadioGroup mRadioGroup;
+    List<String> marketNameList = new ArrayList<>();//菜市场字典
+    List<String> boothNoList = new ArrayList<>();//摊位号字典
     Map<String, Object> userinfo;
     Gson gson;
     OrderListBean orderListBean;
@@ -106,6 +115,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
     SamplingBean samplingBean;
     String caiyangno;//采样单号
     BaiduLocationHelper baiduLocationHelper;
+    private List<下属> marketInfo;
 
     @Override
     public void onConnComplete(String result, int flag, Object... tag) {
@@ -143,6 +153,20 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                     toast("上传失败," + message);
                 }
                 break;
+            case 3:
+                Log.d(TAG, result);
+                JiancheBean jiancheBean = gson.fromJson(result, JiancheBean.class);
+                List<菜市场> caishichanglist = jiancheBean.getSitinfo().get菜市场();
+                for (菜市场 csc : caishichanglist) {
+                    marketNameList.add(csc.get名称());
+                    for (下属 x : csc.get下属()) {
+                        boothNoList.add(x.get摊位号());
+                    }
+                }
+//                Log.d(TAG,""+marketNameList.size()+"   "+boothNoList);
+                edMarketName.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, marketNameList));
+                edBoothNo.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, boothNoList));
+                break;
         }
     }
 
@@ -164,6 +188,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         getFlexibleBar().setTitle("新增采样单");
         getFlexibleBar().getRightTextView().setText("上传");
         setOnFlexibleClickListener();
+        gson = new GsonBuilder().create();
         mdaoSession = ((App) getActivity().getApplication()).mdaoSession;
         tvOrderNo = findViewById(R.id.tv_orderno);
         tvLeibie = findViewById(R.id.tv_leibie);
@@ -180,10 +205,16 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         gv = findViewById(R.id.gv_photo);
         tvMethond = findViewById(R.id.tv_methond);
         tvCheckFile = findViewById(R.id.tv_checkfile);
+        edMarketName = findViewById(R.id.tv_market_name);
+        edBoothNo = findViewById(R.id.tv_booth_no);
+        Map<String, Object> argument = getArgument(new String[]{"sorderno"});
+        Log.d("gggjjjjccc",argument.get("sorderno").toString());
+        tvOrderNo.setText(argument.get("sorderno").toString());
         userinfo = UltimatePreferenceHelper.get("userinfo", new String[]{"susername", "spwd"});
+        openUrl(CommonInfo.getSiteInfo, new RequestParams(new String[]{"user", "pw"},
+                new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 3);
         tvCaiyangyuan.setText(userinfo.get("susername").toString());
         dictionaryDao = ((App) getActivity().getApplication()).daoSession.getDictionaryDao();
-        gson = new GsonBuilder().create();
         tvOrderNo.setOnClickListener(this);
         tvLeibie.setOnClickListener(this);
         tvMingchen.setOnClickListener(this);
@@ -237,13 +268,13 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 String time = String.valueOf(date.getTime());
                 caiyangno = "NO" + Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID).toUpperCase() + time;
                 Log.d(TAG, caiyangno);
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间"},
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号"},
                                 new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
-                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date)}),
+                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo)}),
                         new RequestFileParams(fileKeys, fileValues), 2);
                 samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
-                        personSign, givePersonSign, imgBuilder.toString());
+                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName),getSFText(edBoothNo));
                 Log.d(TAG, samplingBean.toString());
                 mdaoSession.getSamplingBeanDao().insert(samplingBean);
                 progressDialog = new IOSProgressDialog(getActivity());

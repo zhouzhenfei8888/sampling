@@ -118,11 +118,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:paddingRight="5dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -138,21 +138,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="无"
                 android:paddingBottom="3dp"
                 android:paddingRight="3dp"
-                android:paddingTop="3dp" />
+                android:paddingTop="3dp"
+                android:text="无" />
+
             <TextView
                 android:id="@+id/tv_checkfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/editbg"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingRight="3dp"
-                android:text="查看"
-                android:background="@drawable/editbg"
-                android:paddingTop="3dp" />
+                android:paddingTop="3dp"
+                android:text="查看" />
         </LinearLayout>
 
 
@@ -209,6 +210,74 @@
                 android:layout_weight="3.5"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
+                android:text="菜市场名：" />
+
+            <TextView
+                android:id="@+id/tv_market_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editbg"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/c_f0f0f0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:text="摊位号：" />
+
+            <TextView
+                android:id="@+id/tv_booth_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editbg"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/c_f0f0f0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
                 android:text="采样数量：" />
 
             <EditText
@@ -216,11 +285,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="number"
-                android:textColor="@color/c_90000000"
-                android:enabled="false"
                 android:background="@drawable/editbg"
-                android:gravity="center" />
+                android:enabled="false"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:inputType="number"
+                android:textColor="@color/c_90000000" />
         </LinearLayout>
 
         <View
@@ -258,6 +330,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:enabled="false"
                     android:text="常温"
                     android:textColor="#90000000" />
 
@@ -266,6 +339,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
+                    android:enabled="false"
                     android:text="冷藏"
                     android:textColor="#90000000" />
             </RadioGroup>
@@ -331,10 +405,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:enabled="false"
-                android:textColor="@color/c_90000000"
                 android:background="@drawable/editbg"
-                android:gravity="center" />
+                android:enabled="false"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/c_90000000" />
         </LinearLayout>
 
         <View

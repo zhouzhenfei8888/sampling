@@ -18,6 +18,7 @@ import com.sampling.Beans.SamplingBean;
 import com.sampling.App;
 import com.sampling.R;
 import com.sampling.dao.DaoSession;
+import com.sampling.dao.SamplingBeanDao;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class CaiyangListFrag extends UltimateFragment implements OnRefreshListen
     public DaoSession mdaoSession;
     List<SamplingBean> samplingBeanList;
     CaiyangListAdapter adapter;
+    SamplingBeanDao samplingBeanDao;
 
     @Override
     protected int setContentView() {
@@ -56,7 +58,8 @@ public class CaiyangListFrag extends UltimateFragment implements OnRefreshListen
     @Override
     protected void initEvent(Bundle savedInstanceState) {
         mdaoSession = ((App) getActivity().getApplication()).mdaoSession;
-        samplingBeanList = mdaoSession.getSamplingBeanDao().loadAll();
+        samplingBeanDao = mdaoSession.getSamplingBeanDao();
+        samplingBeanList = samplingBeanDao.queryBuilder().orderDesc(SamplingBeanDao.Properties.Id).list();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter = new CaiyangListAdapter(getActivity(), samplingBeanList, R.layout.list_caiyang_item));
@@ -73,7 +76,7 @@ public class CaiyangListFrag extends UltimateFragment implements OnRefreshListen
     @Override
     public void onRefresh() {
         samplingBeanList.clear();
-        samplingBeanList.addAll(mdaoSession.getSamplingBeanDao().loadAll());
+        samplingBeanList.addAll(samplingBeanDao.queryBuilder().orderDesc(SamplingBeanDao.Properties.Id).list());
         Log.d(TAG, "" + samplingBeanList.size());
         adapter.notifyDataSetChanged();
         recyclerView.onRefreshComplete();
