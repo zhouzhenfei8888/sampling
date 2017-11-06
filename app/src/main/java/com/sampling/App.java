@@ -18,6 +18,7 @@ import com.sampling.dao.DaoSession;
 
 /**
  * Created by zzf on 17-10-23.
+ * red branch
  */
 
 public class App extends UltimateApplication {
@@ -47,9 +48,14 @@ public class App extends UltimateApplication {
         UltimatePreferenceHelper.getInstance();
         AssetsDatabaseManager.initManager(this);
         setDataBase();
-        mPosApi = PosApi.getInstance(this);
+        try {
+            mPosApi = PosApi.getInstance(this);
 
-        initPos();
+            initPos();
+        }catch (UnsatisfiedLinkError error){
+            error.printStackTrace();
+        }
+
     }
 
     private void initPos() {

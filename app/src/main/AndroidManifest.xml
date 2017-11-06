@@ -45,16 +45,6 @@
             android:enabled="true"
             android:process=":remote" />
 
-<!--        <receiver android:name=".Service.StartReceiver">
-            <intent-filter android:priority="996">
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </receiver>-->
-        <!-- 扫描服务 -->
-        <service android:name=".Service.ScanService"></service>
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="5DLYRGBfU3gTpv7m01F8LNpeZIfkqg4X" />

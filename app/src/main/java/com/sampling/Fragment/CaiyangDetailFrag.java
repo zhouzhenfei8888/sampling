@@ -3,7 +3,6 @@ package com.sampling.Fragment;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -22,14 +21,13 @@ import android.widget.Toast;
 
 import com.bill.ultimatefram.ui.UltimateFragment;
 import com.bill.ultimatefram.util.ExternalFileHelper;
-import com.bill.ultimatefram.util.QRCode;
 import com.bill.ultimatefram.util.UltimateImageLoaderHelper;
 import com.bill.ultimatefram.view.listview.adapter.CommonAdapter;
 import com.bill.ultimatefram.view.listview.adapter.Holder;
+import com.sampling.App;
 import com.sampling.Beans.SamplingBean;
 import com.sampling.Common.BarcodeCreater;
 import com.sampling.Common.BitmapTools;
-import com.sampling.App;
 import com.sampling.R;
 import com.sampling.Service.ScanService;
 import com.sampling.dao.DaoSession;
@@ -49,6 +47,7 @@ import java.util.List;
 public class CaiyangDetailFrag extends UltimateFragment {
     TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan;
     EditText edShuliang, edCandi;
+    TextView tvMarketName,tvBoothNo;
     ImageView ivSign, ivGiveSign;
     RadioGroup mRadioGroup;
     GridView gv;//现场图片添加
@@ -85,6 +84,8 @@ public class CaiyangDetailFrag extends UltimateFragment {
         mRadioGroup = findViewById(R.id.radio_group);
         ivSign = findViewById(R.id.iv_sign);
         ivGiveSign = findViewById(R.id.iv_give_sign);
+        tvBoothNo = findViewById(R.id.tv_booth_no);
+        tvMarketName = findViewById(R.id.tv_market_name);
         gv = findViewById(R.id.gv_photo);
         getFlexibleBar().setTitle("采样单详情");
         getFlexibleBar().setRightText("打印");
@@ -107,6 +108,8 @@ public class CaiyangDetailFrag extends UltimateFragment {
         tvCaiyangyuan.setText(samplingBean.getUser());
         edShuliang.setText(samplingBean.getCaiyangshuliang());
         edCandi.setText(samplingBean.getCandi());
+        tvMarketName.setText(samplingBean.getCscm());
+        tvBoothNo.setText(samplingBean.getTwh());
         if (samplingBean.getStrogemethond().equals("常温")) {
             Log.d(TAG, "常温");
             ((RadioButton) findViewById(R.id.radio_normal)).setChecked(true);
@@ -405,7 +408,12 @@ public class CaiyangDetailFrag extends UltimateFragment {
     @Override
     public void onResume() {
         super.onResume();
-        openDevice();
+        try {
+            openDevice();
+        }catch (UnsatisfiedLinkError e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override

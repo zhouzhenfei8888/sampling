@@ -40,6 +40,8 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         public final static Property Signpath = new Property(13, String.class, "signpath", false, "SIGNPATH");
         public final static Property Givesignpath = new Property(14, String.class, "givesignpath", false, "GIVESIGNPATH");
         public final static Property Images = new Property(15, String.class, "images", false, "IMAGES");
+        public final static Property Cscm = new Property(16, String.class, "cscm", false, "CSCM");
+        public final static Property Twh = new Property(17, String.class, "twh", false, "TWH");
     }
 
 
@@ -70,7 +72,9 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
                 "\"CANDI\" TEXT," + // 12: candi
                 "\"SIGNPATH\" TEXT," + // 13: signpath
                 "\"GIVESIGNPATH\" TEXT," + // 14: givesignpath
-                "\"IMAGES\" TEXT);"); // 15: images
+                "\"IMAGES\" TEXT," + // 15: images
+                "\"CSCM\" TEXT," + // 16: cscm
+                "\"TWH\" TEXT);"); // 17: twh
     }
 
     /** Drops the underlying database table. */
@@ -162,6 +166,16 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         if (images != null) {
             stmt.bindString(16, images);
         }
+ 
+        String cscm = entity.getCscm();
+        if (cscm != null) {
+            stmt.bindString(17, cscm);
+        }
+ 
+        String twh = entity.getTwh();
+        if (twh != null) {
+            stmt.bindString(18, twh);
+        }
     }
 
     @Override
@@ -247,6 +261,16 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         if (images != null) {
             stmt.bindString(16, images);
         }
+ 
+        String cscm = entity.getCscm();
+        if (cscm != null) {
+            stmt.bindString(17, cscm);
+        }
+ 
+        String twh = entity.getTwh();
+        if (twh != null) {
+            stmt.bindString(18, twh);
+        }
     }
 
     @Override
@@ -272,7 +296,9 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // candi
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // signpath
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // givesignpath
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15) // images
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // images
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // cscm
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17) // twh
         );
         return entity;
     }
@@ -295,6 +321,8 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         entity.setSignpath(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setGivesignpath(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setImages(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setCscm(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setTwh(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
      }
     
     @Override

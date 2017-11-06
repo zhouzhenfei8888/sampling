@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
 
 import com.bill.ultimatefram.net.RequestParams;
 import com.bill.ultimatefram.ui.UltimateNetFrag;
@@ -55,6 +56,12 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         orderInfoList = new ArrayList<>();
         recyclerView.setAdapter(orderAdapter = new OrderAdapter(getActivity(), orderInfoList, R.layout.order_item));
         recyclerView.setOnRefreshListener(this);
+        recyclerView.setOnItemClickListener(new UltimateRecycleAdapter.OnItemClickListener() {
+            @Override
+            public void onRecycleItemClickListener(Object o, View view, int position, long id, int type) {
+                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"},new Object[]{((OrderInfo)o).get任务编号()}),true);
+            }
+        });
 //        recyclerView.setEmptyView(R.layout.empty_view,R.layout.empty_view);
     }
 

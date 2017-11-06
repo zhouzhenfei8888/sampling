@@ -1,7 +1,6 @@
 
 package com.sampling.Beans;
 
-import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,8 +8,6 @@ import com.google.gson.annotations.SerializedName;
 @SuppressWarnings("unused")
 public class 下属 {
 
-    @SerializedName("\u4e0b\u5c5e")
-    private List<下属> m下属;
     @SerializedName("\u540d\u79f0")
     private String m名称;
     @SerializedName("\u644a\u4f4d\u53f7")
@@ -19,14 +16,6 @@ public class 下属 {
     private String m类型;
     @SerializedName("\u7f16\u7801")
     private String m编码;
-
-    public List<下属> get下属() {
-        return m下属;
-    }
-
-    public void set下属(List<下属> 下属) {
-        m下属 = 下属;
-    }
 
     public String get名称() {
         return m名称;

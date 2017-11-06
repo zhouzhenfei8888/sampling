@@ -29,12 +29,14 @@ public class SamplingBean {
     String signpath;
     String givesignpath;
     String images;
-    @Generated(hash = 884894859)
+    String cscm;//菜市场名
+    String twh;//摊位号
+    @Generated(hash = 673308754)
     public SamplingBean(Long id, String isupload, String caiyanno, String renwuno,
             String yangpinglb, String yangpingmc, String gps,
             String caiyangshuliang, String time, String strogemethond, String user,
             String pwd, String candi, String signpath, String givesignpath,
-            String images) {
+            String images, String cscm, String twh) {
         this.id = id;
         this.isupload = isupload;
         this.caiyanno = caiyanno;
@@ -51,6 +53,8 @@ public class SamplingBean {
         this.signpath = signpath;
         this.givesignpath = givesignpath;
         this.images = images;
+        this.cscm = cscm;
+        this.twh = twh;
     }
     @Generated(hash = 1614502257)
     public SamplingBean() {
@@ -171,5 +175,17 @@ public class SamplingBean {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public String getCscm() {
+        return this.cscm;
+    }
+    public void setCscm(String cscm) {
+        this.cscm = cscm;
+    }
+    public String getTwh() {
+        return this.twh;
+    }
+    public void setTwh(String twh) {
+        this.twh = twh;
     }
 }
