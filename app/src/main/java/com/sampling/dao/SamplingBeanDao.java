@@ -42,6 +42,7 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         public final static Property Images = new Property(15, String.class, "images", false, "IMAGES");
         public final static Property Cscm = new Property(16, String.class, "cscm", false, "CSCM");
         public final static Property Twh = new Property(17, String.class, "twh", false, "TWH");
+        public final static Property Detail = new Property(18, String.class, "detail", false, "DETAIL");
     }
 
 
@@ -74,7 +75,8 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
                 "\"GIVESIGNPATH\" TEXT," + // 14: givesignpath
                 "\"IMAGES\" TEXT," + // 15: images
                 "\"CSCM\" TEXT," + // 16: cscm
-                "\"TWH\" TEXT);"); // 17: twh
+                "\"TWH\" TEXT," + // 17: twh
+                "\"DETAIL\" TEXT);"); // 18: detail
     }
 
     /** Drops the underlying database table. */
@@ -176,6 +178,11 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         if (twh != null) {
             stmt.bindString(18, twh);
         }
+ 
+        String detail = entity.getDetail();
+        if (detail != null) {
+            stmt.bindString(19, detail);
+        }
     }
 
     @Override
@@ -271,6 +278,11 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         if (twh != null) {
             stmt.bindString(18, twh);
         }
+ 
+        String detail = entity.getDetail();
+        if (detail != null) {
+            stmt.bindString(19, detail);
+        }
     }
 
     @Override
@@ -298,7 +310,8 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // givesignpath
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // images
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // cscm
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17) // twh
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // twh
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // detail
         );
         return entity;
     }
@@ -323,6 +336,7 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         entity.setImages(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setCscm(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
         entity.setTwh(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setDetail(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
      }
     
     @Override

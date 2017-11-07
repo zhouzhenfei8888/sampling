@@ -86,7 +86,7 @@ import okio.Okio;
 
 public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListener, BaiduLocationHelper.OnReceiveLocationListener {
     TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile;
-    EditText edShuliang, edCandi;
+    EditText edShuliang, edCandi,edDetail;
     AutoCompleteTextView edMarketName, edBoothNo;
     RadioGroup mRadioGroup;
     List<String> marketNameList = new ArrayList<>();//菜市场字典
@@ -207,6 +207,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         tvCheckFile = findViewById(R.id.tv_checkfile);
         edMarketName = findViewById(R.id.tv_market_name);
         edBoothNo = findViewById(R.id.tv_booth_no);
+        edDetail = findViewById(R.id.tv_detail);
         Map<String, Object> argument = getArgument(new String[]{"sorderno"});
         Log.d("gggjjjjccc",argument.get("sorderno").toString());
         tvOrderNo.setText(argument.get("sorderno").toString());
@@ -268,13 +269,13 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 String time = String.valueOf(date.getTime());
                 caiyangno = "NO" + Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID).toUpperCase() + time;
                 Log.d(TAG, caiyangno);
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号"},
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号","样本详情"},
                                 new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
-                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo)}),
+                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo),getSFText(edDetail)}),
                         new RequestFileParams(fileKeys, fileValues), 2);
                 samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
-                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName),getSFText(edBoothNo));
+                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName),getSFText(edBoothNo),getSFText(edDetail));
                 Log.d(TAG, samplingBean.toString());
                 mdaoSession.getSamplingBeanDao().insert(samplingBean);
                 progressDialog = new IOSProgressDialog(getActivity());

@@ -23,8 +23,29 @@
             android:id="@+id/tv_orderno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:text="任务编号："
+            android:textColor="@color/c_90000000" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+        <com.bill.ultimatefram.view.textview.TypefaceTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text="@string/text_left"
+            android:textColor="@color/app_color"
+            app:typefaceModify="iconfont.ttf" />
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="剩余数量："
             android:textColor="@color/c_90000000" />
     </LinearLayout>
 
