@@ -121,6 +121,40 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:text="样本详情：" />
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editbg"
+                android:gravity="center"
+                android:paddingBottom="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="3dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/c_f0f0f0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:visibility="gone">
 
@@ -219,9 +253,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/editbg"
                 android:gravity="center"
-                android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:paddingRight="3dp" />
+                android:paddingRight="3dp"
+                android:paddingTop="3dp" />
         </LinearLayout>
 
         <View
@@ -253,9 +287,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/editbg"
                 android:gravity="center"
-                android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:paddingRight="3dp" />
+                android:paddingRight="3dp"
+                android:paddingTop="3dp" />
         </LinearLayout>
 
         <View
@@ -270,7 +304,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:paddingRight="5dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -288,11 +323,11 @@
                 android:background="@drawable/editbg"
                 android:enabled="false"
                 android:gravity="center"
-                android:textSize="14sp"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
                 android:inputType="number"
-                android:textColor="@color/c_90000000" />
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:textColor="@color/c_90000000"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <View
@@ -408,10 +443,10 @@
                 android:background="@drawable/editbg"
                 android:enabled="false"
                 android:gravity="center"
-                android:textSize="14sp"
-                android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:textColor="@color/c_90000000" />
+                android:paddingTop="3dp"
+                android:textColor="@color/c_90000000"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <View

@@ -3,6 +3,7 @@ package com.sampling.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -59,7 +60,7 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         recyclerView.setOnItemClickListener(new UltimateRecycleAdapter.OnItemClickListener() {
             @Override
             public void onRecycleItemClickListener(Object o, View view, int position, long id, int type) {
-                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"},new Object[]{((OrderInfo)o).get任务编号()}),true);
+                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"}, new Object[]{((OrderInfo) o).get任务编号()}), true);
             }
         });
 //        recyclerView.setEmptyView(R.layout.empty_view,R.layout.empty_view);
@@ -73,7 +74,7 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         if (orderListBean.getCode() == 200) {
             orderInfoList.clear();
             orderInfoList.addAll(orderListBean.getBody());
-            Log.d(TAG,"listsize:"+orderInfoList.size());
+            Log.d(TAG, "listsize:" + orderInfoList.size());
             recyclerView.onRefreshComplete();
             orderAdapter.notifyDataSetChanged();
         }
@@ -94,6 +95,8 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
             holder.setText(R.id.tv_orderno, "任务编号: " + orderInfo.get任务编号());
             holder.setText(R.id.tv_yangben, "抽检样本: " + orderInfo.get抽检样本());
             holder.setText(R.id.tv_xiangmu, "抽检项目: " + orderInfo.get抽检项目());
+            long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.getM完成数量()) ? "0" : orderInfo.getM完成数量());
+            holder.setText(R.id.tv_left, "剩余数量: " + shengyuvalue);
             holder.setText(R.id.tv_num, "抽检数量: " + orderInfo.get抽检数量());
             holder.setText(R.id.tv_time, "发布时间: " + orderInfo.get下达日期().split(" ")[0] + " | 到期时间:" + orderInfo.get目标完成日期().split(" ")[0]);
             holder.setText(R.id.tv_order_target, "发布人: " + orderInfo.get任务目标());

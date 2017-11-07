@@ -28,6 +28,16 @@ public class OrderInfo {
     private String m状态;
     @SerializedName("\u76ee\u6807\u5b8c\u6210\u65e5\u671f")
     private String m目标完成日期;
+    @SerializedName("\u5b8c\u6210\u6570\u91cf")
+    private String m完成数量;
+
+    public String getM完成数量() {
+        return m完成数量;
+    }
+
+    public void setM完成数量(String m完成数量) {
+        this.m完成数量 = m完成数量;
+    }
 
     public String getXid() {
         return mXid;

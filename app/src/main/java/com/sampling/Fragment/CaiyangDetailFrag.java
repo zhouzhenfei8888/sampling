@@ -49,7 +49,7 @@ import woyou.aidlservice.jiuiv5.IWoyouService;
  */
 
 public class CaiyangDetailFrag extends UltimateFragment {
-    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan;
+    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan,tvDetail;
     EditText edShuliang, edCandi;
     TextView edMarketName,edBoothNo;
     ImageView ivSign, ivGiveSign;
@@ -82,6 +82,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         ivGiveSign = findViewById(R.id.iv_give_sign);
         edMarketName = findViewById(R.id.tv_market_name);
         edBoothNo = findViewById(R.id.tv_booth_no);
+        tvDetail = findViewById(R.id.tv_detail);
         gv = findViewById(R.id.gv_photo);
         getFlexibleBar().setTitle("采样单详情");
         getFlexibleBar().setRightText("打印");
@@ -106,6 +107,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         edCandi.setText(samplingBean.getCandi());
         edBoothNo.setText(samplingBean.getTwh());
         edMarketName.setText(samplingBean.getCscm());
+        tvDetail.setText(samplingBean.getDetail());
         if (samplingBean.getStrogemethond().equals("常温")) {
             Log.d(TAG, "常温");
             ((RadioButton) findViewById(R.id.radio_normal)).setChecked(true);
@@ -159,8 +161,8 @@ public class CaiyangDetailFrag extends UltimateFragment {
                         sb.append("\n");
                         sb.append("GPS：" + samplingBean.getGps());
                         sb.append("\n");
-                        sb.append("采样数量：" + samplingBean.getCaiyangshuliang());
-                        sb.append("\n");
+//                        sb.append("采样数量：" + samplingBean.getCaiyangshuliang());
+//                        sb.append("\n");
                         sb.append("存储方式：" + samplingBean.getStrogemethond());
                         sb.append("\n");
                         sb.append("采样员：" + samplingBean.getUser());
