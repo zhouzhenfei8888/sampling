@@ -56,4 +56,6 @@ dependencies {
     compile 'com.github.barteksc:android-pdf-viewer:2.7.0-beta.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/zypos1.8.jar')
+    compile files('libs/core.jar')
+    compile files('libs/IdCardUartLib.jar')
 }
