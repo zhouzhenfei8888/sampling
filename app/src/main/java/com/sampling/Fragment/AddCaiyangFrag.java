@@ -126,7 +126,10 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 orderlist.addAll(orderListBean.getBody());
                 IOSListDialog iosListDialog = new IOSListDialog(getActivity());
                 for (OrderInfo orderInfo : orderlist) {
-                    iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
+                    long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.get已采样数量()) ? "0" : orderInfo.get已采样数量());
+                    if(shengyuvalue>0){
+                        iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
+                    }
                 }
                 iosListDialog.show();
                 iosListDialog.setOnIOSItemClickListener(new IOSListDialog.OnIOSItemClickListener() {

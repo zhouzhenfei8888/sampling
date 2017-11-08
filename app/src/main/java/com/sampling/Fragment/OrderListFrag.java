@@ -73,7 +73,13 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         OrderListBean orderListBean = gson.fromJson(result, OrderListBean.class);
         if (orderListBean.getCode() == 200) {
             orderInfoList.clear();
-            orderInfoList.addAll(orderListBean.getBody());
+//            orderInfoList.addAll(orderListBean.getBody());
+            for(OrderInfo orderInfo:orderListBean.getBody()){
+                long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.get已采样数量()) ? "0" : orderInfo.get已采样数量());
+                if(shengyuvalue>0){
+                    orderInfoList.add(orderInfo);
+                }
+            }
             Log.d(TAG, "listsize:" + orderInfoList.size());
             recyclerView.onRefreshComplete();
             orderAdapter.notifyDataSetChanged();
@@ -95,7 +101,7 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
             holder.setText(R.id.tv_orderno, "任务编号: " + orderInfo.get任务编号());
             holder.setText(R.id.tv_yangben, "抽检样本: " + orderInfo.get抽检样本());
             holder.setText(R.id.tv_xiangmu, "抽检项目: " + orderInfo.get抽检项目());
-            long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.getM完成数量()) ? "0" : orderInfo.getM完成数量());
+            long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.get已采样数量()) ? "0" : orderInfo.get已采样数量());
             holder.setText(R.id.tv_left, "剩余数量: " + shengyuvalue);
             holder.setText(R.id.tv_num, "抽检数量: " + orderInfo.get抽检数量());
             holder.setText(R.id.tv_time, "发布时间: " + orderInfo.get下达日期().split(" ")[0] + " | 到期时间:" + orderInfo.get目标完成日期().split(" ")[0]);
