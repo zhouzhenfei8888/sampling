@@ -423,6 +423,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         super.onDestroy();
         if (mPrintQueue != null) {
             mPrintQueue.close();
+            closeDevice();
         }
     }
 

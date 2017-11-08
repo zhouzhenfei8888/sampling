@@ -86,7 +86,7 @@ import okio.Okio;
 
 public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListener, BaiduLocationHelper.OnReceiveLocationListener {
     TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile;
-    EditText edShuliang, edCandi,edDetail;
+    EditText edShuliang, edCandi, edDetail;
     AutoCompleteTextView edMarketName, edBoothNo;
     RadioGroup mRadioGroup;
     List<String> marketNameList = new ArrayList<>();//菜市场字典
@@ -126,7 +126,10 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 orderlist.addAll(orderListBean.getBody());
                 IOSListDialog iosListDialog = new IOSListDialog(getActivity());
                 for (OrderInfo orderInfo : orderlist) {
-                    iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
+                    Long value = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.getM已采样数量()) ? "0" : orderInfo.getM已采样数量());
+                    if (value > 0) {
+                        iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
+                    }
                 }
                 iosListDialog.show();
                 iosListDialog.setOnIOSItemClickListener(new IOSListDialog.OnIOSItemClickListener() {
@@ -209,7 +212,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         edBoothNo = findViewById(R.id.tv_booth_no);
         edDetail = findViewById(R.id.tv_detail);
         Map<String, Object> argument = getArgument(new String[]{"sorderno"});
-        Log.d("gggjjjjccc",argument.get("sorderno").toString());
+        Log.d("gggjjjjccc", argument.get("sorderno").toString());
         tvOrderNo.setText(argument.get("sorderno").toString());
         userinfo = UltimatePreferenceHelper.get("userinfo", new String[]{"susername", "spwd"});
         openUrl(CommonInfo.getSiteInfo, new RequestParams(new String[]{"user", "pw"},
@@ -269,13 +272,13 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 String time = String.valueOf(date.getTime());
                 caiyangno = "NO" + Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID).toUpperCase() + time;
                 Log.d(TAG, caiyangno);
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号","样本详情"},
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情"},
                                 new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
-                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo),getSFText(edDetail)}),
+                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail)}),
                         new RequestFileParams(fileKeys, fileValues), 2);
                 samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
-                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName),getSFText(edBoothNo),getSFText(edDetail));
+                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail));
                 Log.d(TAG, samplingBean.toString());
                 mdaoSession.getSamplingBeanDao().insert(samplingBean);
                 progressDialog = new IOSProgressDialog(getActivity());

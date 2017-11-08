@@ -229,6 +229,7 @@
             android:layout_margin="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
@@ -254,6 +255,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout

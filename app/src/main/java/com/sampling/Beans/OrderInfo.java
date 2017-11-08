@@ -31,6 +31,16 @@ public class OrderInfo {
     private String m目标完成日期;
     @SerializedName("\u5b8c\u6210\u6570\u91cf")
     private String m完成数量;
+    @SerializedName("\u5df2\u91c7\u6837\u6570\u91cf")
+    private String m已采样数量;
+
+    public String getM已采样数量() {
+        return m已采样数量;
+    }
+
+    public void setM已采样数量(String m已采样数量) {
+        this.m已采样数量 = m已采样数量;
+    }
 
     public String get完成数量() {
         return m完成数量;
