@@ -1,6 +1,8 @@
 package com.sampling.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,7 +63,9 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         recyclerView.setOnItemClickListener(new UltimateRecycleAdapter.OnItemClickListener() {
             @Override
             public void onRecycleItemClickListener(Object o, View view, int position, long id, int type) {
-                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"},new Object[]{((OrderInfo)o).get任务编号()}),true);
+//                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"},new Object[]{((OrderInfo)o).get任务编号()}),true);
+                startFragmentForResult(new AddCaiyangFrag().setArgument(new String[]{"sorderno","sliebie","smingchen"},
+                        new Object[]{((OrderInfo)o).get任务编号(),((OrderInfo)o).get抽检项目(),((OrderInfo)o).get抽检样本()}),10001);
             }
         });
 //        recyclerView.setEmptyView(R.layout.empty_view,R.layout.empty_view);
@@ -84,6 +88,13 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
             Log.d(TAG,"listsize:"+orderInfoList.size());
             recyclerView.onRefreshComplete();
             orderAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_CANCELED){
+            onRefresh();
         }
     }
 
