@@ -1,6 +1,8 @@
 package com.sampling.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -49,7 +51,8 @@ public class CaiyangListFrag extends UltimateFragment implements OnRefreshListen
         getFlexibleBar().getRightTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(AddCaiyangFrag.class, true);
+//                replaceFragment(AddCaiyangFrag.class, true);
+                startFragmentForResult(new AddCaiyangFrag(),123);
             }
         });
         recyclerView = findViewById(R.id.recycleview);
@@ -80,6 +83,14 @@ public class CaiyangListFrag extends UltimateFragment implements OnRefreshListen
         Log.d(TAG, "" + samplingBeanList.size());
         adapter.notifyDataSetChanged();
         recyclerView.onRefreshComplete();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_CANCELED){
+            onRefresh();
+        }
     }
 
     private class CaiyangListAdapter extends UltimateRecycleAdapter<SamplingBean> {

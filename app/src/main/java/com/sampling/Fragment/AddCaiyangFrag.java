@@ -211,9 +211,12 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         edMarketName = findViewById(R.id.tv_market_name);
         edBoothNo = findViewById(R.id.tv_booth_no);
         edDetail = findViewById(R.id.tv_detail);
-        Map<String, Object> argument = getArgument(new String[]{"sorderno"});
+        Map<String, Object> argument = getArgument(new String[]{"sorderno","sxiangmu","smingchen"});
         Log.d("gggjjjjccc",argument.get("sorderno").toString());
         tvOrderNo.setText(argument.get("sorderno").toString());
+        tvLeibie.setText(argument.get("sxiangmu").toString());
+        tvMingchen.setText(argument.get("smingchen").toString());
+        tvMethond.setText(argument.get("smingchen").toString()+"采样方法");
         userinfo = UltimatePreferenceHelper.get("userinfo", new String[]{"susername", "spwd"});
         openUrl(CommonInfo.getSiteInfo, new RequestParams(new String[]{"user", "pw"},
                 new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 3);

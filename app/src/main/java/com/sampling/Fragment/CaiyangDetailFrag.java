@@ -12,6 +12,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -120,13 +121,15 @@ public class CaiyangDetailFrag extends UltimateFragment {
         UltimateImageLoaderHelper.loadImage(ExternalFileHelper.getStorageDirectory().getPath() + File.separator + samplingBean.getSignpath(), ivSign, UltimateImageLoaderHelper.LoadType.STORAGE);
         UltimateImageLoaderHelper.loadImage(ExternalFileHelper.getStorageDirectory().getPath() + File.separator + samplingBean.getGivesignpath(), ivGiveSign, UltimateImageLoaderHelper.LoadType.STORAGE);
         String imagestr = samplingBean.getImages();
-        String[] images = imagestr.split(",");
-        imagelist = new ArrayList<>();
-        for (int i = 0; i < images.length; i++) {
-            imagelist.add(images[i]);
+        if(!TextUtils.isEmpty(imagestr)){
+            String[] images = imagestr.split(",");
+            imagelist = new ArrayList<>();
+            for (int i = 0; i < images.length; i++) {
+                imagelist.add(images[i]);
+            }
+            gv.setAdapter(new MyImageAdapter(getActivity(), imagelist, R.layout.myphoto));
         }
         initPrint();
-        gv.setAdapter(new MyImageAdapter(getActivity(), imagelist, R.layout.myphoto));
         getFlexibleBar().getRightTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

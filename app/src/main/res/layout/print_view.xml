@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="采样编号：" />
@@ -54,7 +54,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="任务编号：" />
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="样品类别：" />
@@ -120,7 +120,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="样品名称：" />
@@ -202,7 +202,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="GPS：" />
@@ -236,7 +236,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="采样数量：" />
@@ -270,7 +270,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="存储方式：" />
@@ -303,7 +303,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="采样员：" />
@@ -336,7 +336,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="来源产地：" />

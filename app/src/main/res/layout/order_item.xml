@@ -18,6 +18,7 @@
             android:layout_height="16dp"
             android:text="@string/text_form"
             android:textColor="@color/app_color"
+            android:textSize="11sp"
             app:typefaceModify="iconfont.ttf" />
 
         <TextView
@@ -28,6 +29,7 @@
             android:layout_marginLeft="10dp"
             android:singleLine="true"
             android:text="任务编号："
+            android:textSize="11sp"
             android:textColor="@color/c_90000000" />
 
 
@@ -37,6 +39,7 @@
             android:text="@string/text_left"
             android:textColor="@color/app_color"
             android:layout_toLeftOf="@+id/tv_left"
+            android:textSize="11sp"
             app:typefaceModify="iconfont.ttf" />
 
         <TextView
@@ -48,6 +51,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="剩余数量："
+            android:textSize="11sp"
             android:textColor="@color/c_90000000" />
     </RelativeLayout>
 
@@ -62,6 +66,7 @@
             android:layout_height="16dp"
             android:text="@string/text_yangben"
             android:textColor="@color/app_color"
+            android:textSize="11sp"
             app:typefaceModify="iconfont.ttf" />
 
         <TextView
@@ -69,7 +74,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:textSize="11sp"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:text="抽检样本" />
 
         <com.bill.ultimatefram.view.textview.TypefaceTextView
@@ -77,6 +84,7 @@
             android:layout_height="16dp"
             android:text="@string/text_xiangmu"
             android:textColor="@color/app_color"
+            android:textSize="11sp"
             app:typefaceModify="iconfont.ttf" />
 
         <TextView
@@ -84,6 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:textSize="11sp"
+            android:ellipsize="end"
             android:layout_weight="1"
             android:text="抽检项目" />
 
@@ -91,6 +101,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:text="@string/text_no"
+            android:textSize="11sp"
             android:textColor="@color/app_color"
             app:typefaceModify="iconfont.ttf" />
 
@@ -100,6 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:textSize="11sp"
             android:text="抽检数量" />
     </LinearLayout>
 
@@ -114,6 +126,7 @@
             android:layout_height="16dp"
             android:text="@string/text_clock"
             android:textColor="@color/app_color"
+            android:textSize="11sp"
             app:typefaceModify="iconfont.ttf" />
 
         <TextView
@@ -124,6 +137,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="发布时间：2017-05-10  |  到期时间：2017-10-18"
+            android:textSize="11sp"
             android:textColor="@color/c_90000000" />
     </LinearLayout>
 
@@ -138,6 +152,7 @@
             android:layout_height="16dp"
             android:text="@string/text_account"
             android:textColor="@color/app_color"
+            android:textSize="11sp"
             app:typefaceModify="iconfont.ttf" />
 
         <TextView
@@ -148,6 +163,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="发布人：市检测所"
+            android:textSize="11sp"
             android:textColor="@color/c_90000000" />
     </LinearLayout>
 </LinearLayout>

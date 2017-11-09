@@ -1,6 +1,8 @@
 package com.sampling.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -22,7 +24,12 @@ import com.sampling.Beans.OrderListBean;
 import com.sampling.Common.CommonInfo;
 import com.sampling.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +42,8 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
     List<OrderInfo> orderInfoList;
     Map<String, Object> userinfo;
     OrderAdapter orderAdapter;
+    public int orderlistrequestcode = 1111;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     protected int setContentView() {
@@ -60,7 +69,9 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         recyclerView.setOnItemClickListener(new UltimateRecycleAdapter.OnItemClickListener() {
             @Override
             public void onRecycleItemClickListener(Object o, View view, int position, long id, int type) {
-                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"}, new Object[]{((OrderInfo) o).get任务编号()}), true);
+//                replaceFragment(new AddCaiyangFrag().setArgument(new String[]{"sorderno"}, new Object[]{((OrderInfo) o).get任务编号()}), true);
+                startFragmentForResult(new AddCaiyangFrag().setArgument(new String[]{"sorderno","sxiangmu","smingchen"},
+                        new Object[]{((OrderInfo) o).get任务编号(),((OrderInfo) o).get抽检项目(),((OrderInfo) o).get抽检样本()}), orderlistrequestcode);
             }
         });
 //        recyclerView.setEmptyView(R.layout.empty_view,R.layout.empty_view);
@@ -73,14 +84,33 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
         OrderListBean orderListBean = gson.fromJson(result, OrderListBean.class);
         if (orderListBean.getCode() == 200) {
             orderInfoList.clear();
-//            orderInfoList.addAll(orderListBean.getBody());
-            for(OrderInfo orderInfo:orderListBean.getBody()){
+            for (OrderInfo orderInfo : orderListBean.getBody()) {
                 long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.get已采样数量()) ? "0" : orderInfo.get已采样数量());
-                if(shengyuvalue>0){
+                if (shengyuvalue > 0) {
                     orderInfoList.add(orderInfo);
                 }
             }
-            Log.d(TAG, "listsize:" + orderInfoList.size());
+            Collections.sort(orderInfoList, new Comparator<OrderInfo>() {
+                @Override
+                public int compare(OrderInfo o1, OrderInfo o2) {
+                    Date date1 = null;
+                    Date date2 = null;
+                    try {
+                        date1 = format.parse(o1.get下达日期());
+                        date2 = format.parse(o2.get下达日期());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d(TAG, date1.getTime() + "--------" + date2.getTime());
+                    if (date2.getTime() > date1.getTime()) {
+                        return 1;
+                    }
+                    if (date2.getTime() == date1.getTime()) {
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
             recyclerView.onRefreshComplete();
             orderAdapter.notifyDataSetChanged();
         }
@@ -89,6 +119,14 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
     @Override
     public void onRefresh() {
         openUrl(CommonInfo.getOrderList, new RequestParams(new String[]{"user", "pw"}, new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_CANCELED) {
+            onRefresh();
+        }
     }
 
     private class OrderAdapter extends UltimateRecycleAdapter<OrderInfo> {
