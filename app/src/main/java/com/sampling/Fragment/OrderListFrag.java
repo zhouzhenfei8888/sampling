@@ -86,6 +86,7 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
             orderInfoList.clear();
             for (OrderInfo orderInfo : orderListBean.getBody()) {
                 long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.get已采样数量()) ? "0" : orderInfo.get已采样数量());
+                Log.d(TAG,"shengyuvalue:"+shengyuvalue+"choujian"+orderInfo.get抽检数量()+"yicaiyang"+orderInfo.get已采样数量());
                 if (shengyuvalue > 0) {
                     orderInfoList.add(orderInfo);
                 }
@@ -101,7 +102,6 @@ public class OrderListFrag extends UltimateNetFrag implements OnRefreshListener 
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    Log.d(TAG, date1.getTime() + "--------" + date2.getTime());
                     if (date2.getTime() > date1.getTime()) {
                         return 1;
                     }

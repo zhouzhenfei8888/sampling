@@ -85,9 +85,9 @@ import okio.Okio;
  */
 
 public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListener, BaiduLocationHelper.OnReceiveLocationListener {
-    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile;
-    EditText edShuliang, edCandi,edDetail;
-    AutoCompleteTextView edMarketName, edBoothNo;
+    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile, edMarketName;
+    EditText edShuliang, edCandi, edDetail;
+    AutoCompleteTextView edBoothNo;
     RadioGroup mRadioGroup;
     List<String> marketNameList = new ArrayList<>();//菜市场字典
     List<String> boothNoList = new ArrayList<>();//摊位号字典
@@ -127,7 +127,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 IOSListDialog iosListDialog = new IOSListDialog(getActivity());
                 for (OrderInfo orderInfo : orderlist) {
                     long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.get已采样数量()) ? "0" : orderInfo.get已采样数量());
-                    if(shengyuvalue>0){
+                    if (shengyuvalue > 0) {
                         iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
                     }
                 }
@@ -159,7 +159,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
             case 3:
                 Log.d(TAG, result);
                 JiancheBean jiancheBean = gson.fromJson(result, JiancheBean.class);
-                List<菜市场> caishichanglist = jiancheBean.getSitinfo().get菜市场();
+                final List<菜市场> caishichanglist = jiancheBean.getSitinfo().get菜市场();
                 for (菜市场 csc : caishichanglist) {
                     marketNameList.add(csc.get名称());
                     for (下属 x : csc.get下属()) {
@@ -167,7 +167,25 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                     }
                 }
 //                Log.d(TAG,""+marketNameList.size()+"   "+boothNoList);
-                edMarketName.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, marketNameList));
+                if (caishichanglist.size() > 0) {
+                    edMarketName.setText(caishichanglist.get(0).get名称());
+                }
+                edMarketName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        IOSListDialog dialog = new IOSListDialog(getActivity());
+                        for (菜市场 csc : caishichanglist) {
+                            dialog.addListItem(csc.get名称(), Color.parseColor("#90000000"));
+                        }
+                        dialog.show();
+                        dialog.setOnIOSItemClickListener(new IOSListDialog.OnIOSItemClickListener() {
+                            @Override
+                            public void onIOSItemClick(IOSListDialog.IOSListItem data, TextView item, int position, Object tag) {
+                                edMarketName.setText(item.getText());
+                            }
+                        });
+                    }
+                });
                 edBoothNo.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, boothNoList));
                 break;
         }
@@ -191,6 +209,8 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         getFlexibleBar().setTitle("新增采样单");
         getFlexibleBar().getRightTextView().setText("上传");
         setOnFlexibleClickListener();
+        getClassify();//获取本地的样品分类列表
+        getMethond();//获取采样方法
         gson = new GsonBuilder().create();
         mdaoSession = ((App) getActivity().getApplication()).mdaoSession;
         tvOrderNo = findViewById(R.id.tv_orderno);
@@ -211,12 +231,19 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         edMarketName = findViewById(R.id.tv_market_name);
         edBoothNo = findViewById(R.id.tv_booth_no);
         edDetail = findViewById(R.id.tv_detail);
-        Map<String, Object> argument = getArgument(new String[]{"sorderno","sxiangmu","smingchen"});
-        Log.d("gggjjjjccc",argument.get("sorderno").toString());
+        Map<String, Object> argument = getArgument(new String[]{"sorderno", "sxiangmu", "smingchen"});
+        Log.d("gggjjjjccc", argument.get("sorderno").toString());
         tvOrderNo.setText(argument.get("sorderno").toString());
-        tvLeibie.setText(argument.get("sxiangmu").toString());
         tvMingchen.setText(argument.get("smingchen").toString());
-        tvMethond.setText(argument.get("smingchen").toString()+"采样方法");
+        tvMethond.setText(argument.get("smingchen").toString() + "采样方法");
+        ClassifyBean classifyBean = gson.fromJson(classifyStr, ClassifyBean.class);
+        for (Body body : classifyBean.getBody()) {
+            for (Child child : body.getChildren()) {
+                if (child.getTitle().equals(argument.get("smingchen").toString())) {
+                    tvLeibie.setText(body.getTitle());
+                }
+            }
+        }
         userinfo = UltimatePreferenceHelper.get("userinfo", new String[]{"susername", "spwd"});
         openUrl(CommonInfo.getSiteInfo, new RequestParams(new String[]{"user", "pw"},
                 new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 3);
@@ -229,8 +256,6 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         linGiveSign.setOnClickListener(this);
         tvMethond.setOnClickListener(this);
         tvCheckFile.setOnClickListener(this);
-        getClassify();//获取本地的样品分类列表
-        getMethond();//获取采样方法
         imageFiles = new ArrayList<>();
         setGpsInfo();
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -275,13 +300,13 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 String time = String.valueOf(date.getTime());
                 caiyangno = "NO" + Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID).toUpperCase() + time;
                 Log.d(TAG, caiyangno);
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号","样本详情"},
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情"},
                                 new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
-                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo),getSFText(edDetail)}),
+                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail)}),
                         new RequestFileParams(fileKeys, fileValues), 2);
                 samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
-                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName),getSFText(edBoothNo),getSFText(edDetail));
+                        personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail));
                 Log.d(TAG, samplingBean.toString());
                 mdaoSession.getSamplingBeanDao().insert(samplingBean);
                 progressDialog = new IOSProgressDialog(getActivity());
