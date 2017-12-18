@@ -1,6 +1,7 @@
 package com.sampling.Fragment;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,10 +11,12 @@ import android.os.Bundle;
 import android.posapi.PosApi;
 import android.posapi.PrintQueue;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -45,11 +48,12 @@ import java.util.List;
  */
 
 public class CaiyangDetailFrag extends UltimateFragment {
-    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan,tvDetail;
+    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvDetail;
     EditText edShuliang, edCandi;
-    TextView tvMarketName,tvBoothNo;
+    TextView tvMarketName, tvBoothNo;
     ImageView ivSign, ivGiveSign;
     RadioGroup mRadioGroup;
+    LinearLayout lineImages;
     GridView gv;//现场图片添加
 
     public DaoSession mdaoSession;
@@ -88,6 +92,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         tvMarketName = findViewById(R.id.tv_market_name);
         tvDetail = findViewById(R.id.tv_detail);
         gv = findViewById(R.id.gv_photo);
+        lineImages = findViewById(R.id.lin_images);
         getFlexibleBar().setTitle("采样单详情");
         getFlexibleBar().setRightText("打印");
         setOnFlexibleClickListener();
@@ -101,7 +106,6 @@ public class CaiyangDetailFrag extends UltimateFragment {
         queryBuilder = mdaoSession.getSamplingBeanDao().queryBuilder();
         queryBuilder.where(SamplingBeanDao.Properties.Id.eq(id));
         samplingBean = queryBuilder.list().get(0);
-        Log.d(TAG, samplingBean.toString());
         tvOrderNo.setText(samplingBean.getRenwuno());
         tvLeibie.setText(samplingBean.getYangpinglb());
         tvMingchen.setText(samplingBean.getYangpingmc());
@@ -129,7 +133,12 @@ public class CaiyangDetailFrag extends UltimateFragment {
         for (int i = 0; i < images.length; i++) {
             imagelist.add(images[i]);
         }
-        gv.setAdapter(new MyImageAdapter(getActivity(), imagelist, R.layout.myphoto));
+        if (imagestr.equals("")) {
+            lineImages.setVisibility(View.GONE);
+        } else {
+            gv.setAdapter(new MyImageAdapter(getActivity(), imagelist, R.layout.myphoto));
+        }
+
         setPrint();
         getFlexibleBar().getRightTextView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +153,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
                 ((TextView) view.findViewById(R.id.tv_storge)).setText(samplingBean.getStrogemethond());
                 ((TextView) view.findViewById(R.id.tv_caiyangyuan)).setText(samplingBean.getUser());
                 ((TextView) view.findViewById(R.id.tv_candi)).setText(samplingBean.getCandi());
-                final Bitmap mBitmap = BarcodeCreater.encode2dAsBitmap(samplingBean.getCaiyanno(),200,200,2);
+                final Bitmap mBitmap = BarcodeCreater.encode2dAsBitmap(samplingBean.getCaiyanno(), 200, 200, 2);
 
                 ((ImageView) view.findViewById(R.id.iv_qr)).setImageBitmap(mBitmap);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -260,8 +269,8 @@ public class CaiyangDetailFrag extends UltimateFragment {
             addPrintTextWithSize(1, concentration,
                     (str + "\n").getBytes("GBK"));
             byte[] printData = BitmapTools.bitmap2PrinterBytes(bitmap);
-            mPrintQueue.addBmp(0,90,200,200,printData);
-            addPrintTextWithSize(1,concentration,"-------------------------------\n\n\n\n\n".getBytes("GBK"));
+            mPrintQueue.addBmp(0, 90, 200, 200, printData);
+            addPrintTextWithSize(1, concentration, "-------------------------------\n\n\n\n\n".getBytes("GBK"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -412,7 +421,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         super.onResume();
         try {
             openDevice();
-        }catch (UnsatisfiedLinkError e){
+        } catch (UnsatisfiedLinkError e) {
             e.printStackTrace();
         }
 
@@ -421,6 +430,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+//        mApi.closeDev();
         if (mPrintQueue != null) {
             mPrintQueue.close();
             closeDevice();
@@ -435,7 +445,20 @@ public class CaiyangDetailFrag extends UltimateFragment {
         @Override
         protected void convert(String s, Holder holder, int position) {
             Log.d(TAG, ExternalFileHelper.getPath(s, true));
-            UltimateImageLoaderHelper.loadImage(ExternalFileHelper.getPath(s, true), (ImageView) holder.getView(R.id.iv), UltimateImageLoaderHelper.LoadType.STORAGE);
+            UltimateImageLoaderHelper.loadImage(ExternalFileHelper.getPath(s, true),
+                    (ImageView) holder.getView(R.id.iv), UltimateImageLoaderHelper.LoadType.STORAGE);
+ /*           holder.setOnClickListener(R.id.iv, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    ImageView imageView = (ImageView) LayoutInflater.from(getActivity()).inflate(R.layout.myphoto,null,false);
+                    imageView.setLayoutParams(new LinearLayout.LayoutParams(imageView.getWidth(), imageView.getHeight()));
+                    builder.setView(imageView);
+                    Dialog dialog = builder.create();
+                    dialog.show();
+                    dialog.setCancelable(true);
+                }
+            });*/
         }
     }
 }

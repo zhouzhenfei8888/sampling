@@ -244,17 +244,17 @@
                 android:paddingTop="3dp"
                 android:text="菜市场名：" />
 
-            <AutoCompleteTextView
+            <TextView
                 android:id="@+id/tv_market_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:completionThreshold="1"
                 android:textSize="14sp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:textColor="@color/c_90000000"
                 android:background="@drawable/editbg"
+                android:drawableRight="@drawable/more_unfold"
                 android:gravity="center"
                 android:paddingRight="3dp" />
         </LinearLayout>

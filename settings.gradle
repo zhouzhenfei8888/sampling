@@ -1,1 +1,1 @@
-include ':app',':ultimateFram'
+include ':app',':ultimateFram',':camera'

@@ -162,24 +162,24 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lin_destory"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:visibility="invisible">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ruzhu" />
+                    android:src="@drawable/ypcx" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="采样方法"
+                    android:text="样本销毁"
                     android:textColor="@color/defcolor"
                     android:textSize="@dimen/textsize_15" />
 
@@ -267,6 +267,19 @@
                 android:textColor="@color/white"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@mipmap/lawer" />
+
+            <TextView
+                android:id="@+id/tv_destory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:paddingLeft="10dp"
+                android:text="样本销毁"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@mipmap/saomiao" />
         </LinearLayout>
     </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
 </com.mxn.soul.flowingdrawer_core.FlowingDrawer>

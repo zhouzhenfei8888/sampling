@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sampling</string>
+    <string name="app_name">手持采样仪</string>
     <string name="text_left_menu">&#xe699;</string>
     <string name="text_clock">&#xe6bb;</string>
     <string name="text_account">&#xe6b8;</string>

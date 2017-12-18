@@ -1,15 +1,20 @@
 package com.sampling.Fragment;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bill.ultimatefram.ui.UltimateFragment;
+import com.bill.ultimatefram.view.dialog.IOSAlertDialog;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.sampling.R;
+import com.sampling.ScanActivity;
+import com.sampling.VideoActivity;
 
 /**
  * Created by zzf on 17-10-23.
@@ -17,8 +22,8 @@ import com.sampling.R;
 
 public class MainFrag extends UltimateFragment implements View.OnClickListener{
     FlowingDrawer drawer;
-    TextView tvHome,tvOrderlist,tvCaiyangList,tvCaiyangMethond,tvLawer;
-    LinearLayout linOrderlist,linCaiyanglist,linCaiyangMethond,linLawer;
+    TextView tvHome,tvOrderlist,tvCaiyangList,tvCaiyangMethond,tvLawer,tvDestory;
+    LinearLayout linOrderlist,linCaiyanglist,linCaiyangMethond,linLawer,linDestory;
 
     @Override
     protected int setContentView() {
@@ -41,7 +46,8 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener{
         linCaiyanglist = findViewById(R.id.lin_caiyanglist);
         linCaiyangMethond = findViewById(R.id.lin_caiyangMethond);
         linLawer = findViewById(R.id.lin_lawer);
-
+        linDestory = findViewById(R.id.lin_destory);
+        tvDestory = findViewById(R.id.tv_destory);
     }
 
     @Override
@@ -63,10 +69,12 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener{
         tvCaiyangList.setOnClickListener(this);
         tvCaiyangMethond.setOnClickListener(this);
         tvLawer.setOnClickListener(this);
+        tvDestory.setOnClickListener(this);
         linOrderlist.setOnClickListener(this);
         linCaiyanglist.setOnClickListener(this);
         linCaiyangMethond.setOnClickListener(this);
         linLawer.setOnClickListener(this);
+        linDestory.setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +99,10 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener{
                 drawer.closeMenu(true);
                 replaceFragment(LawerFrag.class,true);
                 break;
+            case R.id.tv_destory:
+                drawer.closeMenu(true);
+                startActivityForResult(new Intent(getActivity(), ScanActivity.class), 10001);
+                break;
             case R.id.lin_orderlist:
                 drawer.closeMenu(true);
                 replaceFragment(OrderListFrag.class,true);
@@ -107,6 +119,34 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener{
                 drawer.closeMenu(true);
                 replaceFragment(LawerFrag.class,true);
                 break;
+            case R.id.lin_destory:
+                drawer.closeMenu(true);
+                startActivityForResult(new Intent(getActivity(), ScanActivity.class), 10001);
+                //测试
+//                startActivity(new Intent(getActivity(),VideoActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 10001){
+            if(data != null){
+                final String str = data.getStringExtra("qr_code");
+                IOSAlertDialog dialog = new IOSAlertDialog(getActivity());
+                dialog.setTitle("是否销毁");
+                dialog.setMessage(str);
+                dialog.setCancelable(true);
+                dialog.setOnIOSAlertClickListener(new IOSAlertDialog.OnIOSAlertClickListener() {
+                    @Override
+                    public void onIOSClick(View v, Object tag, int flag) {
+                        if(v.getId() == R.id.tv_positive){
+                            startActivity(VideoActivity.class,new String[]{"sqr_code"},new Object[]{str},false);
+                        }
+                    }
+                });
+                dialog.show();
+            }
         }
     }
 }
