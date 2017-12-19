@@ -128,6 +128,9 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                     long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.getM已采样数量()) ? "0" : orderInfo.getM已采样数量());
                     if (shengyuvalue > 0) {
                         iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
+                    }else {
+                        toast("任务已全部完成！");
+                        return;
                     }
                 }
                 iosListDialog.show();
