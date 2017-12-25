@@ -3,6 +3,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/.idea
 .DS_Store
 /build
 /ultimateFram
@@ -20,3 +21,6 @@
 将删除 message
 将删除 settings.gradle
 将删除 ultimateFram/
+将删除 app/src/main/res/color/
+将删除 app/src/main/res/mipmap-xxxhdpi/saomiao.png
+将删除 camera/
