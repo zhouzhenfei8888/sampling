@@ -1,5 +1,6 @@
 package com.sampling.Fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -43,6 +44,7 @@ import com.bill.ultimatefram.view.listview.adapter.CommonAdapter;
 import com.bill.ultimatefram.view.listview.adapter.Holder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.sampling.App;
 import com.sampling.Beans.Body;
 import com.sampling.Beans.Child;
@@ -75,7 +77,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.functions.Consumer;
 import okio.BufferedSource;
 import okio.Okio;
 
@@ -123,15 +127,18 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 orderListBean = gson.fromJson(result, OrderListBean.class);
                 List<OrderInfo> orderlist = new ArrayList<>();
                 orderlist.addAll(orderListBean.getBody());
+                int num=0;
                 IOSListDialog iosListDialog = new IOSListDialog(getActivity());
                 for (OrderInfo orderInfo : orderlist) {
                     long shengyuvalue = orderInfo.get抽检数量() - Integer.valueOf(TextUtils.isEmpty(orderInfo.getM已采样数量()) ? "0" : orderInfo.getM已采样数量());
                     if (shengyuvalue > 0) {
                         iosListDialog.addListItem(orderInfo.get任务编号(), Color.parseColor("#90000000"));
-                    }else {
-                        toast("任务已全部完成！");
-                        return;
+                        num++;
                     }
+                }
+                if(num==0){
+                    toast("任务已全部完成");
+                    return;
                 }
                 iosListDialog.show();
                 iosListDialog.setOnIOSItemClickListener(new IOSListDialog.OnIOSItemClickListener() {
@@ -254,7 +261,6 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 3);
         tvCaiyangyuan.setText(userinfo.get("susername").toString());
         dictionaryDao = ((App) getActivity().getApplication()).daoSession.getDictionaryDao();
-        tvOrderNo.setOnClickListener(this);
         tvLeibie.setOnClickListener(this);
         tvMingchen.setOnClickListener(this);
         linSign.setOnClickListener(this);
@@ -319,6 +325,14 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 progressDialog.show();
             }
         });
+        RxView.clicks(tvOrderNo).throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        openUrl(CommonInfo.getOrderList, new RequestParams(new String[]{"user", "pw"},
+                                new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 1);
+                    }
+                });
     }
 
     private void getMethond() {
@@ -403,7 +417,17 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
 //        mLocationClient = new LocationClient(getActivity());
 //        mLocationClient.registerLocationListener(this);
 //        mLocationClient.start();
-        baiduLocationHelper = new BaiduLocationHelper(getApplicationContext()).registerLocationListener(this);
+        RxPermissions rxPermissions = new RxPermissions(getActivity());
+        rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        baiduLocationHelper = new BaiduLocationHelper(getApplicationContext()).registerLocationListener(AddCaiyangFrag.this);
+                    }
+                });
+        if(baiduLocationHelper == null){
+            baiduLocationHelper = new BaiduLocationHelper(getApplicationContext()).registerLocationListener(this);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -411,8 +435,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_orderno:
-                openUrl(CommonInfo.getOrderList, new RequestParams(new String[]{"user", "pw"},
-                        new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 1);
+
                 break;
             case R.id.tv_leibie:
                 ClassifyBean classifyBean = gson.fromJson(classifyStr, ClassifyBean.class);

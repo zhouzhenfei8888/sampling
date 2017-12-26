@@ -12,6 +12,6 @@ public class CommonInfo {
     public static String sessionlogin = url+"/zodobase/do/anon.applogin";
     public static String getdoclist = url+"/zodobase/do/doc.list";
     public static String getpdf = url+"/zodobase/do/Download";
-    public static String ybdestory = url+"/zodobase/do/anon.api.Yanbenxiaohui";
+    public static String ybdestory = url+"/zodobase/do/anon.api.Yangbenxiaohui";
 
 }

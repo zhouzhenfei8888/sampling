@@ -1,6 +1,5 @@
 package com.sampling.Fragment;
 
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;

@@ -36,6 +36,7 @@ import com.sampling.Service.ScanService;
 import com.sampling.dao.DaoSession;
 import com.sampling.dao.SamplingBeanDao;
 
+import org.apache.http.util.EncodingUtils;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.io.File;
