@@ -14,7 +14,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.sampling.App;
+import com.sampling.Beans.EventBean;
 import com.sampling.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.UnsupportedEncodingException;
 
@@ -114,6 +117,7 @@ public class ScanService extends Service {
 						isScan = false;
 						ScanService.mApi.gpioControl(mGpioTrig, 0, 1);
 						handler.removeCallbacks(run);
+						EventBus.getDefault().post(new EventBean(str));
 					} catch (UnsupportedEncodingException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

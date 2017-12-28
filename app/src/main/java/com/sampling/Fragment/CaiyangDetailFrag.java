@@ -265,12 +265,12 @@ public class CaiyangDetailFrag extends UltimateFragment {
     }
 
     private void printText(String str, Bitmap bitmap) {
-        int concentration = 40;
+        int concentration = 65;
         try {
             addPrintTextWithSize(1, concentration,
                     (str + "\n").getBytes("GBK"));
             byte[] printData = BitmapTools.bitmap2PrinterBytes(bitmap);
-            mPrintQueue.addBmp(0, 90, 200, 200, printData);
+            mPrintQueue.addBmp(65, 90, 200, 200, printData);
             addPrintTextWithSize(1, concentration, "-------------------------------\n\n\n\n\n".getBytes("GBK"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -434,7 +434,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
 //        mApi.closeDev();
         if (mPrintQueue != null) {
             mPrintQueue.close();
-            closeDevice();
+//            closeDevice();
         }
     }
 

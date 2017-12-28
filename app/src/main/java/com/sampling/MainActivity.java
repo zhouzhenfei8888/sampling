@@ -15,6 +15,11 @@ public class MainActivity extends UltimateActivity {
 
     private String TAG = "MainActivity";
     private PosApi mPosSDK;
+    private byte mGpioPower = 0x1E ;//PB14
+    private byte mGpioTrig = 0x29 ;//PC9
+
+    private int mCurSerialNo = 3; //usart3
+    private int mBaudrate = 4; //9600
 
     @Override
     protected int setContentView() {
@@ -159,5 +164,20 @@ public class MainActivity extends UltimateActivity {
     @Override
     protected boolean canSetSystemBarOnFragment() {
         return false;
+    }
+
+    private void closeDevice() {
+        // close power
+        ScanService.mApi.gpioControl(mGpioPower, 0, 0);
+
+        ScanService.mApi.extendSerialClose(mCurSerialNo);
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeDevice();
     }
 }
