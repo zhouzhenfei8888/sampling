@@ -183,6 +183,17 @@ public class AddCaiyangBeanFrag extends UltimateNetFrag implements View.OnClickL
     }
 
     @Override
+    public void onConnError(String result, int flag, Object... tag) {
+        if (progressDialog != null) {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        }
+        Log.d(TAG, result);
+        toast(result);
+    }
+
+    @Override
     protected int setContentView() {
         return R.layout.frag_addcaiyang;
     }

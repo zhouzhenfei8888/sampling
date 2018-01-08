@@ -1,5 +1,6 @@
 package com.sampling.Fragment;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,8 +17,11 @@ import com.bill.ultimatefram.view.dialog.IOSProgressDialog;
 import com.sampling.Common.CommonInfo;
 import com.sampling.MainActivity;
 import com.sampling.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.Map;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by zzf on 17-10-23.
@@ -70,6 +74,16 @@ public class LoginFrag extends UltimateNetFrag {
     @Override
     protected void initEvent(Bundle savedInstanceState) {
         super.initEvent(savedInstanceState);
+        new RxPermissions(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.ACCESS_FINE_LOCATION).subscribe(
+                new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        Log.d(TAG, "权限已同意");
+                    }
+                }
+        );
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

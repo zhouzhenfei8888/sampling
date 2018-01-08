@@ -36,7 +36,7 @@ public class VideoFrag extends UltimateNetFrag {
     @Override
     public void onConnComplete(String result, int flag, Object... tag) {
         Log.d(TAG, result);
-        if(progressDialog.isShowing()){
+        if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
         Map<String, Object> res = JsonFormat.formatJson(result, new String[]{"code", "message"});
@@ -49,6 +49,14 @@ public class VideoFrag extends UltimateNetFrag {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onConnError(String result, int flag, Object... tag) {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+        toast("请检查网络连接");
     }
 
     @Override

@@ -2,21 +2,31 @@ package com.sampling.Fragment;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bill.ultimatefram.ui.UltimateFragment;
 import com.bill.ultimatefram.view.dialog.IOSAlertDialog;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import com.sampling.Beans.AppVersionInfo;
 import com.sampling.Beans.EventBean;
+import com.sampling.Beans.ResponseBeans;
+import com.sampling.Common.CommonInfo;
+import com.sampling.HttpClient;
 import com.sampling.R;
 import com.sampling.Service.ScanService;
+import com.sampling.Utils;
 import com.sampling.VideoActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -24,7 +34,20 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.io.IOException;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import me.jessyan.progressmanager.ProgressListener;
+import me.jessyan.progressmanager.ProgressManager;
+import me.jessyan.progressmanager.body.ProgressInfo;
+import okhttp3.ResponseBody;
+import okio.BufferedSink;
+import okio.BufferedSource;
+import okio.Okio;
+import retrofit2.Response;
 
 /**
  * Created by zzf on 17-10-23.
@@ -36,6 +59,9 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
     LinearLayout linOrderlist, linCaiyanglist, linCaiyangMethond, linLawer, linDestory;
 
     private byte mGpioTrig = 0x29;//PC9
+    private Disposable genxindisposable;
+    private Disposable downdisposable;
+    private String versionName;
 
     @Override
     protected int setContentView() {
@@ -64,6 +90,11 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
 
     @Override
     protected void initEvent(Bundle savedInstanceState) {
+        try {
+            versionName = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         EventBus.getDefault().register(this);
         drawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         drawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
@@ -88,18 +119,155 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
         linCaiyangMethond.setOnClickListener(this);
         linLawer.setOnClickListener(this);
         linDestory.setOnClickListener(this);
-        new RxPermissions(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-                Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.ACCESS_FINE_LOCATION).subscribe(
-                new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        Log.d(TAG, "权限已同意");
-                    }
-                }
-        );
+        checkVersion();
         linDestory.setOnTouchListener(this);
         tvDestory.setOnTouchListener(this);
+    }
+
+    private void checkVersion() {
+        HttpClient.getInstance().getVersionInfo("caiyang", new Observer<ResponseBeans<AppVersionInfo>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                genxindisposable = d;
+            }
+
+            @Override
+            public void onNext(ResponseBeans<AppVersionInfo> appVersionInfoResponseBean) {
+                String version = appVersionInfoResponseBean.getBody().getVer();//服务器上最新版本
+                final String downloadfile = appVersionInfoResponseBean.getBody().getFile();
+                float fcurver = Float.valueOf(versionName);
+                float fver = Float.valueOf(version);
+                Log.d(TAG,""+fcurver+"::::"+fver);
+                if (fcurver < fver) {
+                    new MaterialDialog.Builder(getActivity())
+                            .title("版本更新")
+                            .content("有新版本，是否更新?")
+                            .positiveText("确定")
+                            .negativeText("取消")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    doDownLoad(downloadfile);
+                                }
+                            })
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                } else {
+                    toast("已是最新版本！");
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                toast(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    private void doDownLoad(String file) {
+        final String downloadurl = CommonInfo.url2 + file;
+        Log.d(TAG, "url:::" + downloadurl);
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .content("正在下载...")
+                .canceledOnTouchOutside(false)
+                .progress(false, 100,true)
+                .progressNumberFormat("%1d/%2d")
+                .show();
+        ProgressManager.getInstance().addResponseListener(downloadurl, new ProgressListener() {
+            @Override
+            public void onProgress(ProgressInfo progressInfo) {
+                dialog.setProgress(progressInfo.getPercent());
+                Log.d(TAG,""+progressInfo.getPercent());
+            }
+
+            @Override
+            public void onError(long id, Exception e) {
+                e.printStackTrace();
+                Log.d(TAG,e.getMessage());
+            }
+        });
+        HttpClient.getInstance().downLoad(downloadurl, new Observer<Response<ResponseBody>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                downdisposable = d;
+            }
+
+            @Override
+            public void onNext(Response<ResponseBody> responseBodyResponse) {
+                BufferedSource bufferedSource = responseBodyResponse.body().source();
+                Long total = responseBodyResponse.body().contentLength();
+                BufferedSink bufferedSink = null;
+                try {
+                    bufferedSink = Okio.buffer(Okio.sink(new File(Utils.getApkpath())));
+                    bufferedSink.write(bufferedSource.readByteArray());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        bufferedSink.close();
+                        bufferedSource.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+//                Log.d(TAG, "" + responseBodyResponse.body().contentLength());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, e.getMessage());
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                dialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new MaterialDialog.Builder(getActivity())
+                                .title("版本更新")
+                                .content("是否安装caiyang.apk?")
+                                .canceledOnTouchOutside(false)
+                                .positiveText("确定")
+                                .negativeText("取消")
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        installApk();
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                });
+            }
+        });
+    }
+
+    private void installApk() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        // 由于没有在Activity环境下启动Activity,设置下面的标签
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.fromFile(
+                new File(Utils.getApkpath())),
+                "application/vnd.android.package-archive");
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -208,6 +376,12 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (genxindisposable != null && !genxindisposable.isDisposed()) {
+            genxindisposable.dispose();
+        }
+        if (downdisposable != null && !downdisposable.isDisposed()) {
+            downdisposable.dispose();
+        }
     }
 
 

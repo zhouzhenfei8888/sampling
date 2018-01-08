@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.bill.ultimatefram.ui.UltimateFragment;
 import com.bill.ultimatefram.util.UltimatePreferenceHelper;
-import com.bill.ultimatefram.view.listview.ReloadAbsListView;
 import com.bill.ultimatefram.view.recycleview.UltimateMaterialRecyclerView;
 import com.bill.ultimatefram.view.recycleview.adapter.UltimateRecycleAdapter;
 import com.bill.ultimatefram.view.recycleview.adapter.UltimateRecycleHolder;
 import com.google.gson.Gson;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
 import com.marshalchen.ultimaterecyclerview.ui.DividerItemDecoration;
 import com.sampling.Beans.Doc;
 import com.sampling.Beans.DocBean;
@@ -38,7 +35,7 @@ import okhttp3.Response;
  * Created by zzf on 17-10-23.
  */
 
-public class LawerFrag extends UltimateFragment {
+public class LawerFrag extends UltimateFragment implements UltimateRecyclerView.OnLoadMoreListener {
     UltimateMaterialRecyclerView recyclerView;
     OkHttpClient okHttpClient;
     Call call, callPdf;
@@ -68,17 +65,7 @@ public class LawerFrag extends UltimateFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(docAdapter = new DocAdapter(getActivity(), docList, R.layout.item_lawer));
-        recyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
-            @Override
-            public void loadMore(int itemsCount, int maxLastVisiblePosition) {
-                if (mPageIndex < mTotalCount) {
-                    mPageIndex++;
-                    recyclerView.reenableLoadmore();
-                    RequestMsg(mPageIndex);
-                }
-
-            }
-        });
+        recyclerView.setOnLoadMoreListener(this);
         sessionid = (String) UltimatePreferenceHelper.get("userinfo", new String[]{"sessionid"}).get("sessionid");
         gson = new Gson();
         Log.d(TAG, sessionid);
@@ -86,7 +73,7 @@ public class LawerFrag extends UltimateFragment {
         recyclerView.setOnItemClickListener(new UltimateRecycleAdapter.OnItemClickListener() {
             @Override
             public void onRecycleItemClickListener(Object o, View view, int position, long id, int type) {
-                replaceFragment(new PdfFrag().setArgument(new String[]{"spdf"},new Object[]{((Doc) o).get文件()}),true);
+                replaceFragment(new PdfFrag().setArgument(new String[]{"spdf"}, new Object[]{((Doc) o).get文件()}), true);
             }
         });
     }
@@ -115,22 +102,18 @@ public class LawerFrag extends UltimateFragment {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
+                final String json = response.body().string();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            String json = response.body().string();
-                            Log.d(TAG, json);
-                            docBean = gson.fromJson(json, DocBean.class);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        Log.d(TAG, json);
+                        docBean = gson.fromJson(json, DocBean.class);
                         Log.d(TAG, "" + docBean.getDocs().size());
                         mPageIndex = docBean.getPageIndex();
                         mTotalCount = docBean.getTotalCount();
                         docList.addAll(docBean.getDocs());
                         docAdapter.notifyDataSetChanged();
-                        recyclerView.disableLoadmore();
+                        recyclerView.getLoadMoreView().setVisibility(View.GONE);
                     }
                 });
             }
@@ -143,8 +126,18 @@ public class LawerFrag extends UltimateFragment {
         if (call != null) {
             call.cancel();
         }
-        if(callPdf != null){
+        if (callPdf != null) {
             callPdf.cancel();
+        }
+    }
+
+    @Override
+    public void loadMore(int itemsCount, int maxLastVisiblePosition) {
+        recyclerView.onLoadMore();
+        if (mPageIndex < mTotalCount) {
+            mPageIndex++;
+            Log.d(TAG, "" + mPageIndex);
+            RequestMsg(mPageIndex);
         }
     }
 
