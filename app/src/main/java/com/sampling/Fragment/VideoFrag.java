@@ -60,7 +60,7 @@ public class VideoFrag extends UltimateNetFrag {
     protected void initView() {
         getFlexibleBar().setVisibility(View.GONE);
         Map<String, Object> argument = getArgument(new String[]{"sqr_code"});
-        qr_code = argument.get("sqr_code").toString();
+        qr_code = argument.get("sqr_code").toString().trim();
         jCameraView = findViewById(R.id.jcameraview);
         jCameraView.setSaveVideoPath(ExternalFileHelper.getStorageDirectory(true).getPath());
         Log.d(TAG, ExternalFileHelper.getStorageDirectory(true).getPath());

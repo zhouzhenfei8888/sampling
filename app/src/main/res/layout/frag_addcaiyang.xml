@@ -520,6 +520,7 @@
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout
+            android:id="@+id/lin_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

@@ -14,8 +14,8 @@ import com.bill.ultimatefram.view.recycleview.UltimateMaterialRecyclerView;
 import com.bill.ultimatefram.view.recycleview.adapter.UltimateRecycleAdapter;
 import com.bill.ultimatefram.view.recycleview.adapter.UltimateRecycleHolder;
 import com.marshalchen.ultimaterecyclerview.ui.DividerItemDecoration;
-import com.sampling.Beans.SamplingBean;
 import com.sampling.App;
+import com.sampling.Beans.SamplingBean;
 import com.sampling.R;
 import com.sampling.dao.DaoSession;
 import com.sampling.dao.SamplingBeanDao;
@@ -67,7 +67,11 @@ public class CaiyangListFrag extends UltimateFragment implements OnRefreshListen
         recyclerView.setOnItemClickListener(new UltimateRecycleAdapter.OnItemClickListener() {
             @Override
             public void onRecycleItemClickListener(Object o, View view, int position, long id, int type) {
-                replaceFragment(new CaiyangDetailFrag().setArgument(new String[]{"lsamplebeanId"},new Object[]{samplingBeanList.get(position).getId()}),true);
+                if (samplingBeanList.get(position).getIsupload().equals("0")) {
+                    replaceFragment(new AddCaiyangBeanFrag().setArgument(new String[]{"lsamplebeanId"}, new Object[]{samplingBeanList.get(position).getId()}), true);
+                } else {
+                    replaceFragment(new CaiyangDetailFrag().setArgument(new String[]{"lsamplebeanId"}, new Object[]{samplingBeanList.get(position).getId()}), true);
+                }
             }
         });
 //        recyclerView.setEmptyView(R.layout.empty_view,R.layout.empty_view);

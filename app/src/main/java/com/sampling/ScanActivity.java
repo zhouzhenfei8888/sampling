@@ -1,26 +1,10 @@
 package com.sampling;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
-
-import com.bill.ultimatefram.ui.UltimateActivity;
-import com.google.zxing.ResultPoint;
-import com.journeyapps.barcodescanner.BarcodeCallback;
-import com.journeyapps.barcodescanner.BarcodeResult;
-import com.journeyapps.barcodescanner.CameraPreview;
-import com.journeyapps.barcodescanner.CaptureManager;
-import com.journeyapps.barcodescanner.CompoundBarcodeView;
-
-import java.util.List;
-
 /**
  * Created by zzf on 17-7-28.
  */
 
-public class ScanActivity extends UltimateActivity {
+/*public class ScanActivity extends UltimateActivity {
     private CompoundBarcodeView mCompoundScanView;
     private CaptureManager capture;
     int scan_type;
@@ -123,4 +107,4 @@ public class ScanActivity extends UltimateActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         capture.onResume();
     }
-}
+}*/

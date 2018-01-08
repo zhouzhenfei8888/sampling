@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.bill.ultimatefram.ui.UltimateFragment;
 import com.bill.ultimatefram.view.dialog.IOSAlertDialog;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.sampling.Beans.EventBean;
@@ -176,11 +174,11 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+/*        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanResult != null) {
             // handle scan result
             Log.d(TAG, scanResult.toString());
-        }
+        }*/
    /*     if(requestCode == 10001){
             if(data != null){
                 final String str = data.getStringExtra("qr_code");
