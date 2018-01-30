@@ -205,7 +205,7 @@
                 android:layout_weight="3.5"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
-                android:text="GPS：" />
+                android:text="样品详情：" />
 
             <TextView
                 android:id="@+id/tv_gps"
@@ -353,8 +353,8 @@
 
         <ImageView
             android:id="@+id/iv_qr"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center_horizontal" />
 
         <TextView

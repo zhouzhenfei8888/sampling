@@ -149,7 +149,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
                 ((TextView) view.findViewById(R.id.tv_orderno)).setText(samplingBean.getRenwuno());
                 ((TextView) view.findViewById(R.id.tv_leibie)).setText(samplingBean.getYangpinglb());
                 ((TextView) view.findViewById(R.id.tv_mingchen)).setText(samplingBean.getYangpingmc());
-                ((TextView) view.findViewById(R.id.tv_gps)).setText(samplingBean.getGps());
+                ((TextView) view.findViewById(R.id.tv_gps)).setText(samplingBean.getDetail());
                 ((TextView) view.findViewById(R.id.tv_shuliang)).setText(samplingBean.getCaiyangshuliang());
                 ((TextView) view.findViewById(R.id.tv_storge)).setText(samplingBean.getStrogemethond());
                 ((TextView) view.findViewById(R.id.tv_caiyangyuan)).setText(samplingBean.getUser());
@@ -173,7 +173,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
                         sb.append("\n");
                         sb.append("样品名称：" + samplingBean.getYangpingmc());
                         sb.append("\n");
-                        sb.append("GPS：" + samplingBean.getGps());
+                        sb.append("样品详情：" + samplingBean.getDetail());
                         sb.append("\n");
 //                        sb.append("采样数量：" + samplingBean.getCaiyangshuliang());
 //                        sb.append("\n");

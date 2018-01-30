@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.sampling.Common.AssetsDatabaseManager;
 import com.sampling.dao.DaoMaster;
 import com.sampling.dao.DaoSession;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * Created by zzf on 17-10-23.
@@ -55,7 +56,7 @@ public class App extends UltimateApplication {
         }catch (UnsatisfiedLinkError error){
             error.printStackTrace();
         }
-
+        CrashReport.initCrashReport(getApplicationContext(),"8962ad55d4",false);
     }
 
     private void initPos() {

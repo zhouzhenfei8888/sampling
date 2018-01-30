@@ -49,6 +49,7 @@ public class PdfFrag extends UltimateFragment {
         String spdf = (String) getArgument(new String[]{"spdf"}).get("spdf");
         progressDialog = new IOSProgressDialog(getActivity());
         progressDialog.show();
+        pdfView.setEnabled(false);
         getPdf(spdf);
     }
 
@@ -77,16 +78,21 @@ public class PdfFrag extends UltimateFragment {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pdfView.fromBytes(bytes)
-                                .defaultPage(0)
-                                .enableSwipe(true)
-                                .swipeHorizontal(false)
-                                .enableDoubletap(true)
-                                .defaultPage(0)
-                                .enableAnnotationRendering(false)
-                                .password(null)
-                                .scrollHandle(null)
-                                .load();
+                        try {
+                            pdfView.fromBytes(bytes)
+                                    .defaultPage(0)
+                                    .enableSwipe(true)
+                                    .swipeHorizontal(false)
+                                    .enableDoubletap(true)
+                                    .defaultPage(0)
+                                    .enableAnnotationRendering(false)
+                                    .password(null)
+                                    .scrollHandle(null)
+                                    .load();
+                            pdfView.setEnabled(true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 if (progressDialog != null) {
@@ -94,5 +100,11 @@ public class PdfFrag extends UltimateFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        callPdf.cancel();
     }
 }

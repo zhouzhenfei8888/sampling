@@ -18,6 +18,7 @@ import com.sampling.Common.CommonInfo;
 import com.sampling.MainActivity;
 import com.sampling.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Map;
 

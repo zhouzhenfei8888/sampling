@@ -24,8 +24,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -48,19 +50,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ScanActivity"/>
-        <activity android:name=".VideoActivity"/>
+        <!--<activity android:name=".ScanActivity"/>-->
+        <activity android:name=".VideoActivity" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
 
-        <service android:name=".Service.ScanService"/>
+        <service android:name=".Service.ScanService" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="5DLYRGBfU3gTpv7m01F8LNpeZIfkqg4X" />
-
+        <!--bugly异常报备-->
     </application>
 
 </manifest>
