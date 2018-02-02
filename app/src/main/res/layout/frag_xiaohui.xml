@@ -17,7 +17,7 @@
             android:layout_weight="8"
             android:gravity="center"
             android:text="销毁联系人"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/ed_xiaohui_person"
@@ -26,6 +26,9 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:layout_weight="2"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
             android:textColor="@color/black90"
             android:background="@drawable/editbg" />
     </LinearLayout>
@@ -48,7 +51,7 @@
             android:layout_weight="8"
             android:gravity="center"
             android:text="销毁承接商"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/ed_xiaohui_chenjie"
@@ -57,6 +60,9 @@
             android:layout_weight="2"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
             android:textColor="@color/black90"
             android:background="@drawable/editbg" />
     </LinearLayout>
@@ -79,7 +85,7 @@
             android:layout_weight="8"
             android:gravity="center"
             android:text="销毁地点"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/ed_xiaohui_address"
@@ -88,6 +94,9 @@
             android:layout_weight="2"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
             android:textColor="@color/black90"
             android:background="@drawable/editbg" />
     </LinearLayout>
