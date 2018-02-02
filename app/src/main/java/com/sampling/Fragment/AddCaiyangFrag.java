@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.annotation.RequiresApi;
@@ -113,7 +112,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
     List<File> imageFiles;// 拍照的图片
     String givePersonSign, personSign;//采样员，被采样人签名的图片路径
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    IOSProgressDialog progressDialog;
+    IOSProgressDialog progressDialog, progressDialog2;
     String classifyStr, methondStr;//assets中的json文件
     DaoSession mdaoSession;
     SamplingBean samplingBean;
@@ -125,6 +124,9 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
     public void onConnComplete(String result, int flag, Object... tag) {
         switch (flag) {
             case 1:
+                if (progressDialog2 != null && progressDialog2.isShowing()) {
+                    progressDialog2.dismiss();
+                }
                 orderListBean = gson.fromJson(result, OrderListBean.class);
                 List<OrderInfo> orderlist = new ArrayList<>();
                 orderlist.addAll(orderListBean.getBody());
@@ -312,9 +314,9 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 String time = String.valueOf(date.getTime());
                 caiyangno = "NO" + Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID).toUpperCase() + time;
                 Log.d(TAG, caiyangno);
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情","上传仪器"},
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情", "上传仪器"},
                                 new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
-                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail),"123456"}),
+                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail), "123456"}),
                         new RequestFileParams(fileKeys, fileValues), 2);
                 samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
@@ -330,6 +332,9 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
+                        progressDialog2 = new IOSProgressDialog(getActivity());
+                        progressDialog2.setCanceledOnTouchOutside(false);
+                        progressDialog2.show();
                         openUrl(CommonInfo.getOrderList, new RequestParams(new String[]{"user", "pw"},
                                 new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString()}), 1);
                     }
@@ -553,16 +558,16 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                     } catch (IOException e) {
                         e.printStackTrace();
                     }*/
-                    try{
-                        if(!TextUtils.isEmpty(address)){
+                    try {
+                        if (!TextUtils.isEmpty(address)) {
                             mDatum.add(0, address);
                             Log.d(TAG, "address:::" + address);
                             imageFiles.add(new File(address));
                             imageAdapter.notifyDataSetChanged();
-                        }else{
+                        } else {
                             toast("failed");
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         toast("failed");
                     }

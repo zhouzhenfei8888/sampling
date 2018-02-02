@@ -116,9 +116,11 @@ public class VideoFrag extends UltimateNetFrag {
                             progressDialog = new IOSProgressDialog(getActivity());
                             progressDialog.setMessage("正在上传...");
                             progressDialog.show();
+                            Map<String, Object> map = getPreference("xiaohui", new String[]{"sxiaohuiperson", "sxiaohuichenjie", "sxiaohuiaddress"});
                             Map<String, Object> userinfo = UltimatePreferenceHelper.get("userinfo", new String[]{"susername", "spwd"});
-                            openUrl(CommonInfo.ybdestory, new RequestParams(new String[]{"user", "pw", "样本编号", "销毁时间", "销毁状态"},
-                                            new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString(), qr_code, dateFormat.format(new Date()), "已销毁"}),
+                            openUrl(CommonInfo.ybdestory, new RequestParams(new String[]{"user", "pw", "样本编号", "销毁时间", "销毁状态", "销毁联系人", "销毁承接商", "销毁地点"},
+                                            new String[]{userinfo.get("susername").toString(), userinfo.get("spwd").toString(), qr_code, dateFormat.format(new Date()), "已销毁",
+                                                    map.get("sxiaohuiperson").toString(), map.get("sxiaohuichenjie").toString(), map.get("sxiaohuiaddress").toString()}),
                                     new RequestFileParams(new String[]{"销毁视频"},
                                             new RequestFileParams.FileParams[]{new RequestFileParams.FileParams(url)}));
                         }

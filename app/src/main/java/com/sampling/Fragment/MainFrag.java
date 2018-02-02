@@ -71,6 +71,8 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "iconfont.ttf");
         getFlexibleBar().getLeftTextView().setTypeface(typeface);
         getFlexibleBar().getLeftTextView().setText(R.string.text_left_menu);
+        getFlexibleBar().getRightTextView().setTypeface(typeface);
+        getFlexibleBar().getRightTextView().setText(R.string.text_account);
         drawer = findViewById(R.id.drawerlayout);
         tvHome = findViewById(R.id.tv_home);
         tvOrderlist = findViewById(R.id.tv_orderlist);
@@ -83,6 +85,12 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
         linLawer = findViewById(R.id.lin_lawer);
         linDestory = findViewById(R.id.lin_destory);
         tvDestory = findViewById(R.id.tv_destory);
+        getFlexibleBar().getRightTextView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(SettingFrag.class,true);
+            }
+        });
     }
 
     @Override

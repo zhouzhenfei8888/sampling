@@ -95,7 +95,7 @@ public class PdfFrag extends UltimateFragment {
                         }
                     }
                 });
-                if (progressDialog != null) {
+                if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
             }

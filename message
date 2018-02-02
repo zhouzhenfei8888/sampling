@@ -2,3 +2,9 @@ preference{
              UltimatePreferenceHelper.editPreference("userinfo", new String[]{"susername", "spwd", "sessionid"},
                         new String[]{edName.getText().toString(), edPw.getText().toString(), sessionid});
 }
+
+editPreference("marketinfo", new String[]{"smarketname", "smarketid"}, new Object[]{marketname, marketid});
+
+        editPreference("xiaohui", new String[]{"sxiaohuiperson", "sxiaohuichenjie", "sxiaohuiaddress"},
+                new Object[]{getTextViewText(edXiaohuiPerson, ""), getTextViewText(edXiaohuiChenjie, ""),
+                        getTextViewText(edXiaohuiAddress, "")});

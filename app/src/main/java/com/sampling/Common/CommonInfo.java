@@ -15,4 +15,7 @@ public class CommonInfo {
     public static String getpdf = url2+"/zodobase/do/Download";
     public static String ybdestory = url2+"/zodobase/do/anon.api.Yangbenxiaohui";
 
+    //无锡新接口
+    public static String getdata = url2+"/wxxw/do/anon.api.xwdata";
+
 }

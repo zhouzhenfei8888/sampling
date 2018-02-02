@@ -56,7 +56,7 @@ public class App extends UltimateApplication {
         }catch (UnsatisfiedLinkError error){
             error.printStackTrace();
         }
-        CrashReport.initCrashReport(getApplicationContext(),"8962ad55d4",false);
+//        CrashReport.initCrashReport(getApplicationContext(),"8962ad55d4",false);
     }
 
     private void initPos() {
