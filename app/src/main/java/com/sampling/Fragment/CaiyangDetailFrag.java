@@ -154,7 +154,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
                 ((TextView) view.findViewById(R.id.tv_storge)).setText(samplingBean.getStrogemethond());
                 ((TextView) view.findViewById(R.id.tv_caiyangyuan)).setText(samplingBean.getUser());
                 ((TextView) view.findViewById(R.id.tv_candi)).setText(samplingBean.getCandi());
-                final Bitmap mBitmap = BarcodeCreater.encode2dAsBitmap(samplingBean.getCaiyanno(), 200, 200, 2);
+                final Bitmap mBitmap = BarcodeCreater.encode2dAsBitmap(samplingBean.getCaiyanno(), 400, 150, 1);
 
                 ((ImageView) view.findViewById(R.id.iv_qr)).setImageBitmap(mBitmap);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -165,28 +165,17 @@ public class CaiyangDetailFrag extends UltimateFragment {
 //                        printBitmap(image);
                         StringBuilder sb = new StringBuilder();
                         sb.append("-------------------------------");
-                        sb.append("采样编号：" + samplingBean.getCaiyanno());
-                        sb.append("\n");
-                        sb.append("任务编号：" + samplingBean.getRenwuno());
-                        sb.append("\n");
-                        sb.append("样品类别：" + samplingBean.getYangpinglb());
-                        sb.append("\n");
                         sb.append("样品名称：" + samplingBean.getYangpingmc());
                         sb.append("\n");
                         sb.append("样品详情：" + samplingBean.getDetail());
                         sb.append("\n");
-//                        sb.append("采样数量：" + samplingBean.getCaiyangshuliang());
-//                        sb.append("\n");
                         sb.append("存储方式：" + samplingBean.getStrogemethond());
-                        sb.append("\n");
-                        sb.append("采样员：" + samplingBean.getUser());
                         sb.append("\n");
                         sb.append("来源产地：" + samplingBean.getCandi());
                         sb.append("\n");
+                        sb.append("采样编号：");
                         sb.append("\n");
                         printText(sb.toString(), mBitmap);
-//                        printBitmap(bitmap);
-//                        printText("-----------------------------");
                     }
                 });
             }
@@ -270,7 +259,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
             addPrintTextWithSize(1, concentration,
                     (str + "\n").getBytes("GBK"));
             byte[] printData = BitmapTools.bitmap2PrinterBytes(bitmap);
-            mPrintQueue.addBmp(65, 90, 200, 200, printData);
+            mPrintQueue.addBmp(65, 0, 400, 120, printData);
             addPrintTextWithSize(1, concentration, "-------------------------------\n\n\n\n\n".getBytes("GBK"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:visibility="gone"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
@@ -40,12 +41,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:visibility="gone"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
@@ -73,12 +76,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:visibility="gone"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
@@ -106,6 +111,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout
@@ -118,22 +124,41 @@
             android:paddingRight="5dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="样品名称：" />
 
             <TextView
                 android:id="@+id/tv_mingchen"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingRight="3dp"
                 android:paddingTop="3dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:text="存储方式：" />
+
+            <TextView
+                android:id="@+id/tv_storge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:gravity="center"
+                android:inputType="number"
+                android:textColor="@color/c_90000000" />
         </LinearLayout>
 
         <View
@@ -200,18 +225,16 @@
             android:paddingRight="5dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="样品详情：" />
 
             <TextView
                 android:id="@+id/tv_gps"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingRight="3dp"
@@ -264,37 +287,26 @@
             android:layout_margin="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3.5"
-                android:paddingBottom="3dp"
-                android:paddingTop="3dp"
-                android:text="存储方式：" />
 
-            <TextView
-                android:id="@+id/tv_storge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:enabled="false"
-                android:gravity="center"
-                android:inputType="number"
-                android:textColor="@color/c_90000000" />
+
+
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:visibility="gone"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
@@ -322,6 +334,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/c_f0f0f0" />
 
         <LinearLayout
@@ -334,18 +347,16 @@
             android:paddingRight="5dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="来源产地：" />
 
             <TextView
                 android:id="@+id/tv_candi"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:enabled="false"
                 android:gravity="center"
                 android:textColor="@color/c_90000000" />
@@ -353,8 +364,11 @@
 
         <ImageView
             android:id="@+id/iv_qr"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="center"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal" />
 
         <TextView
@@ -363,7 +377,7 @@
             android:layout_height="wrap_content"
             android:text="打印"
             android:textSize="18sp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:textColor="@color/app_color"
             android:layout_gravity="center_horizontal"/>
