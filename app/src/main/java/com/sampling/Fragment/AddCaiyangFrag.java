@@ -173,6 +173,10 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 Log.d(TAG, result);
                 JiancheBean jiancheBean = gson.fromJson(result, JiancheBean.class);
                 final List<菜市场> caishichanglist = jiancheBean.getSitinfo().get菜市场();
+                if(caishichanglist.size()==0){
+                    toast("菜市场还未部署");
+                    return;
+                }
                 for (菜市场 csc : caishichanglist) {
                     marketNameList.add(csc.get名称());
                     for (下属 x : csc.get下属()) {
