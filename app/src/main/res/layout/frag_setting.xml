@@ -5,20 +5,19 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/lay_market_name"
+        android:id="@+id/lay_imei_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:visibility="gone"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_market_name"
+            android:id="@+id/tv_imei"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="市场名称" />
+            android:text="设备编号" />
 
         <ImageView
             android:layout_width="10dp"

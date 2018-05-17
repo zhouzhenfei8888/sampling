@@ -18,7 +18,6 @@ import com.sampling.Common.CommonInfo;
 import com.sampling.MainActivity;
 import com.sampling.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Map;
 
@@ -114,5 +113,9 @@ public class LoginFrag extends UltimateNetFrag {
                 }
             }
         });
+        int imei = (int) UltimatePreferenceHelper.get("CommonInfo", new String[]{"imei"}).get("imei");
+        if (imei == 0) {
+            UltimatePreferenceHelper.editPreference("CommonInfo", new String[]{"imei"}, new Object[]{"123456"});
+        }
     }
 }

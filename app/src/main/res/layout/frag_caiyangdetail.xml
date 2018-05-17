@@ -248,7 +248,7 @@
                 android:text="菜市场名：" />
 
             <TextView
-                android:id="@+id/tv_market_name"
+                android:id="@+id/tv_imei"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

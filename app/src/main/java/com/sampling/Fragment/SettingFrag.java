@@ -15,8 +15,8 @@ import com.sampling.R;
  */
 
 public class SettingFrag extends UltimateFragment {
-    LinearLayout layoutMarketName, layoutYangpinDestory;
-    TextView tvMarketName;
+    LinearLayout layoutImeiName, layoutYangpinDestory;
+    TextView tvImei;
 
     @Override
     protected int setContentView() {
@@ -27,28 +27,35 @@ public class SettingFrag extends UltimateFragment {
     protected void initView() {
         getFlexibleBar().setTitle("用户设置");
         setOnFlexibleClickListener();
-        layoutMarketName = findViewById(R.id.lay_market_name);
+        layoutImeiName = findViewById(R.id.lay_imei_name);
         layoutYangpinDestory = findViewById(R.id.lay_yangpin_desroty);
-        tvMarketName = findViewById(R.id.tv_market_name);
+        tvImei = findViewById(R.id.tv_imei);
     }
 
     @Override
     protected void initEvent(Bundle savedInstanceState) {
-        Object marketname = getPreference("marketinfo", new String[]{"smarketname"}).get("smarketname");
+/*        Object marketname = getPreference("marketinfo", new String[]{"smarketname"}).get("smarketname");
         if (marketname != null && !marketname.equals("")) {
-            tvMarketName.setText("市场名称(" + marketname.toString() + ")");
+            tvImei.setText("市场名称(" + marketname.toString() + ")");
         }
-        layoutMarketName.setOnClickListener(new View.OnClickListener() {
+        layoutImeiName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startFragmentForResult(new MarketNameFrag(), 100);
             }
-        });
+        });*/
 
         layoutYangpinDestory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 replaceFragment(XiaohuiFrag.class, true);
+            }
+        });
+
+        layoutImeiName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new ImeiFrag(),true);
             }
         });
     }
@@ -59,7 +66,7 @@ public class SettingFrag extends UltimateFragment {
         if (resultCode == Activity.RESULT_OK) {
 //            String marketname = data.getStringExtra("marketname");
             String marketname = data.getExtras().getString("marketname");
-            tvMarketName.setText("市场名称(" + marketname + ")");
+            tvImei.setText("市场名称(" + marketname + ")");
         }
     }
 }

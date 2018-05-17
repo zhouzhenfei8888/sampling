@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.text.TextUtils;
 import android.util.Log;
@@ -151,7 +152,7 @@ public class AddCaiyangBeanFrag extends UltimateNetFrag implements View.OnClickL
                 Log.d(TAG, result);
                 JiancheBean jiancheBean = gson.fromJson(result, JiancheBean.class);
                 final List<菜市场> caishichanglist = jiancheBean.getSitinfo().get菜市场();
-                if(caishichanglist.size()==0){
+                if (caishichanglist.size() == 0) {
                     toast("菜市场还未部署");
                     return;
                 }
@@ -231,7 +232,7 @@ public class AddCaiyangBeanFrag extends UltimateNetFrag implements View.OnClickL
         gv = findViewById(R.id.gv_photo);
         tvMethond = findViewById(R.id.tv_methond);
         tvCheckFile = findViewById(R.id.tv_checkfile);
-        edMarketName = findViewById(R.id.tv_market_name);
+        edMarketName = findViewById(R.id.tv_imei);
         edBoothNo = findViewById(R.id.tv_booth_no);
         edDetail = findViewById(R.id.tv_detail);
         lineImages = findViewById(R.id.lin_images);
@@ -284,9 +285,10 @@ public class AddCaiyangBeanFrag extends UltimateNetFrag implements View.OnClickL
                 Date date = new Date();
                 caiyangno = samplingBean.getCaiyanno();
                 Log.d(TAG, caiyangno);
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情","上传仪器"},
+                int imei = (int) UltimatePreferenceHelper.get("CommonInfo", new String[]{"imei"}).get("imei");
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情", "上传仪器"},
                                 new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
-                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail),"123456"}),
+                                        userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail), ""+imei}),
                         new RequestFileParams(fileKeys, fileValues), 2);
                 samplingBean = new SamplingBean(samplingBean.getId(), "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
@@ -310,7 +312,7 @@ public class AddCaiyangBeanFrag extends UltimateNetFrag implements View.OnClickL
 
 
     private void initData() {
-        Log.d(TAG,samplingBean.toString());
+        Log.d(TAG, samplingBean.toString());
         tvOrderNo.setText(samplingBean.getRenwuno());
         tvLeibie.setText(samplingBean.getYangpinglb());
         tvMingchen.setText(samplingBean.getYangpingmc());

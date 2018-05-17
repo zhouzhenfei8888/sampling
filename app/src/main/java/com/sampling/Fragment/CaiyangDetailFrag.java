@@ -1,7 +1,6 @@
 package com.sampling.Fragment;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 import android.posapi.PosApi;
 import android.posapi.PrintQueue;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -36,7 +34,6 @@ import com.sampling.Service.ScanService;
 import com.sampling.dao.DaoSession;
 import com.sampling.dao.SamplingBeanDao;
 
-import org.apache.http.util.EncodingUtils;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.io.File;
@@ -90,7 +87,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         ivSign = findViewById(R.id.iv_sign);
         ivGiveSign = findViewById(R.id.iv_give_sign);
         tvBoothNo = findViewById(R.id.tv_booth_no);
-        tvMarketName = findViewById(R.id.tv_market_name);
+        tvMarketName = findViewById(R.id.tv_imei);
         tvDetail = findViewById(R.id.tv_detail);
         gv = findViewById(R.id.gv_photo);
         lineImages = findViewById(R.id.lin_images);
