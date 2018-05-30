@@ -113,9 +113,9 @@ public class LoginFrag extends UltimateNetFrag {
                 }
             }
         });
-        int imei = (int) UltimatePreferenceHelper.get("CommonInfo", new String[]{"imei"}).get("imei");
-        if (imei == 0) {
-            UltimatePreferenceHelper.editPreference("CommonInfo", new String[]{"imei"}, new Object[]{"123456"});
+        String imei = (String) UltimatePreferenceHelper.get("CommonInfo", new String[]{"simei"}).get("simei");
+        if (imei.equals("")) {
+            UltimatePreferenceHelper.editPreference("CommonInfo", new String[]{"simei"}, new Object[]{"123456"});
         }
     }
 }

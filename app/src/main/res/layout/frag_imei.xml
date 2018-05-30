@@ -29,7 +29,6 @@
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:textSize="15sp"
-            android:inputType="number"
             android:textColor="@color/black90"
             android:background="@drawable/editbg" />
     </LinearLayout>

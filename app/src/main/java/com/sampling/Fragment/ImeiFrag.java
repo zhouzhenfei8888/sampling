@@ -26,12 +26,12 @@ public class ImeiFrag extends UltimateFragment {
 
     @Override
     protected void initEvent(Bundle savedInstanceState) {
-        int imei = (int) UltimatePreferenceHelper.get("CommonInfo", new String[]{"imei"}).get("imei");
+        String imei = (String) UltimatePreferenceHelper.get("CommonInfo", new String[]{"simei"}).get("simei");
         edImei.setText("" + imei);
         getFlexibleBar().getRightTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UltimatePreferenceHelper.editPreference("CommonInfo", new String[]{"imei"}, new Object[]{Integer.valueOf(edImei.getText().toString().trim())});
+                UltimatePreferenceHelper.editPreference("CommonInfo", new String[]{"simei"}, new Object[]{Integer.valueOf(edImei.getText().toString().trim())});
                 toast("保存成功！");
                 onLeftClickListener();
             }
