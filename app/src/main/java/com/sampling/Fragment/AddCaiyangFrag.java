@@ -88,7 +88,7 @@ import okio.Okio;
  */
 
 public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListener, BaiduLocationHelper.OnReceiveLocationListener {
-    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile, edMarketName;
+    TextView tvOrderNo, tvLeibie, tvMingchen,tvMingchen2, tvGps, tvCaiyangyuan, tvMethond, tvCheckFile, edMarketName;
     EditText edShuliang, edCandi, edDetail;
     AutoCompleteTextView edBoothNo;
     RadioGroup mRadioGroup;
@@ -235,6 +235,7 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
         tvOrderNo = findViewById(R.id.tv_orderno);
         tvLeibie = findViewById(R.id.tv_leibie);
         tvMingchen = findViewById(R.id.tv_mingchen);
+        tvMingchen2 = findViewById(R.id.tv_mingchen2);
         tvGps = findViewById(R.id.tv_gps);
         tvCaiyangyuan = findViewById(R.id.tv_caiyangyuan);
         edShuliang = findViewById(R.id.ed_shuliang);
@@ -321,11 +322,11 @@ public class AddCaiyangFrag extends UltimateNetFrag implements View.OnClickListe
                 caiyangno = "NO" + time + random.nextInt(10);
                 Log.d(TAG, caiyangno);
                 String imei = (String) UltimatePreferenceHelper.get("CommonInfo", new String[]{"simei"}).get("simei");
-                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "菜市场名", "摊位号", "样本详情", "上传仪器"},
-                                new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
+                openUrl(CommonInfo.upLoad, new RequestParams(new String[]{"采样编号", "任务编号", "样本类别", "样本名", "采样点GPS", "采样数量", "存储方式", "_采样员用户ID", "_pw", "来源产地", "采样时间", "销售单位", "摊位号", "样本详情", "上传仪器"},
+                                new String[]{caiyangno, getSFText(tvOrderNo), getSFText(tvMingchen), getSFText(tvMingchen2), getSFText(tvGps), getSFText(edShuliang), strogeMethond,
                                         userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi), simpleDateFormat.format(date), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail), ""+imei}),
                         new RequestFileParams(fileKeys, fileValues), 2);
-                samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen), getSFText(tvGps), getSFText(edShuliang),
+                samplingBean = new SamplingBean(null, "0", caiyangno, getSFText(tvOrderNo), getSFText(tvLeibie), getSFText(tvMingchen),getSFText(tvMingchen2), getSFText(tvGps), getSFText(edShuliang),
                         simpleDateFormat.format(date), strogeMethond, userinfo.get("susername").toString(), userinfo.get("spwd").toString(), getSFText(edCandi),
                         personSign, givePersonSign, imgBuilder.toString(), getSFText(edMarketName), getSFText(edBoothNo), getSFText(edDetail));
                 Log.d(TAG, samplingBean.toString());

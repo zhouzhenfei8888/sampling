@@ -46,7 +46,7 @@ import java.util.List;
  */
 
 public class CaiyangDetailFrag extends UltimateFragment {
-    TextView tvOrderNo, tvLeibie, tvMingchen, tvGps, tvCaiyangyuan, tvDetail;
+    TextView tvOrderNo, tvLeibie, tvMingchen,tvMingchen2, tvGps, tvCaiyangyuan, tvDetail;
     EditText edShuliang, edCandi;
     TextView tvMarketName, tvBoothNo;
     ImageView ivSign, ivGiveSign;
@@ -79,6 +79,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         tvOrderNo = findViewById(R.id.tv_orderno);
         tvLeibie = findViewById(R.id.tv_leibie);
         tvMingchen = findViewById(R.id.tv_mingchen);
+        tvMingchen2 = findViewById(R.id.tv_mingchen2);
         tvGps = findViewById(R.id.tv_gps);
         tvCaiyangyuan = findViewById(R.id.tv_caiyangyuan);
         edShuliang = findViewById(R.id.ed_shuliang);
@@ -107,6 +108,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
         tvOrderNo.setText(samplingBean.getRenwuno());
         tvLeibie.setText(samplingBean.getYangpinglb());
         tvMingchen.setText(samplingBean.getYangpingmc());
+        tvMingchen2.setText(samplingBean.getYangpingmc2());
         tvGps.setText(samplingBean.getGps());
         tvCaiyangyuan.setText(samplingBean.getUser());
         edShuliang.setText(samplingBean.getCaiyangshuliang());
@@ -151,6 +153,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
                 ((TextView) view.findViewById(R.id.tv_storge)).setText(samplingBean.getStrogemethond());
                 ((TextView) view.findViewById(R.id.tv_caiyangyuan)).setText(samplingBean.getUser());
                 ((TextView) view.findViewById(R.id.tv_candi)).setText(samplingBean.getCandi());
+                ((TextView) view.findViewById(R.id.tv_qr)).setText(samplingBean.getCaiyanno());
                 final Bitmap mBitmap = BarcodeCreater.encode2dAsBitmap(samplingBean.getCaiyanno(), 400, 150, 1);
 
                 ((ImageView) view.findViewById(R.id.iv_qr)).setImageBitmap(mBitmap);
@@ -170,7 +173,7 @@ public class CaiyangDetailFrag extends UltimateFragment {
                         sb.append("\n");
                         sb.append("来源产地：" + samplingBean.getCandi());
                         sb.append("\n");
-                        sb.append("采样编号：");
+                        sb.append("采样编号："+samplingBean.getCaiyanno());
                         sb.append("\n");
                         printText(sb.toString(), mBitmap);
                     }

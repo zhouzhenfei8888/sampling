@@ -30,19 +30,20 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         public final static Property Renwuno = new Property(3, String.class, "renwuno", false, "RENWUNO");
         public final static Property Yangpinglb = new Property(4, String.class, "yangpinglb", false, "YANGPINGLB");
         public final static Property Yangpingmc = new Property(5, String.class, "yangpingmc", false, "YANGPINGMC");
-        public final static Property Gps = new Property(6, String.class, "gps", false, "GPS");
-        public final static Property Caiyangshuliang = new Property(7, String.class, "caiyangshuliang", false, "CAIYANGSHULIANG");
-        public final static Property Time = new Property(8, String.class, "time", false, "TIME");
-        public final static Property Strogemethond = new Property(9, String.class, "strogemethond", false, "STROGEMETHOND");
-        public final static Property User = new Property(10, String.class, "user", false, "USER");
-        public final static Property Pwd = new Property(11, String.class, "pwd", false, "PWD");
-        public final static Property Candi = new Property(12, String.class, "candi", false, "CANDI");
-        public final static Property Signpath = new Property(13, String.class, "signpath", false, "SIGNPATH");
-        public final static Property Givesignpath = new Property(14, String.class, "givesignpath", false, "GIVESIGNPATH");
-        public final static Property Images = new Property(15, String.class, "images", false, "IMAGES");
-        public final static Property Cscm = new Property(16, String.class, "cscm", false, "CSCM");
-        public final static Property Twh = new Property(17, String.class, "twh", false, "TWH");
-        public final static Property Detail = new Property(18, String.class, "detail", false, "DETAIL");
+        public final static Property Yangpingmc2 = new Property(6, String.class, "yangpingmc2", false, "YANGPINGMC2");
+        public final static Property Gps = new Property(7, String.class, "gps", false, "GPS");
+        public final static Property Caiyangshuliang = new Property(8, String.class, "caiyangshuliang", false, "CAIYANGSHULIANG");
+        public final static Property Time = new Property(9, String.class, "time", false, "TIME");
+        public final static Property Strogemethond = new Property(10, String.class, "strogemethond", false, "STROGEMETHOND");
+        public final static Property User = new Property(11, String.class, "user", false, "USER");
+        public final static Property Pwd = new Property(12, String.class, "pwd", false, "PWD");
+        public final static Property Candi = new Property(13, String.class, "candi", false, "CANDI");
+        public final static Property Signpath = new Property(14, String.class, "signpath", false, "SIGNPATH");
+        public final static Property Givesignpath = new Property(15, String.class, "givesignpath", false, "GIVESIGNPATH");
+        public final static Property Images = new Property(16, String.class, "images", false, "IMAGES");
+        public final static Property Cscm = new Property(17, String.class, "cscm", false, "CSCM");
+        public final static Property Twh = new Property(18, String.class, "twh", false, "TWH");
+        public final static Property Detail = new Property(19, String.class, "detail", false, "DETAIL");
     }
 
 
@@ -64,19 +65,20 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
                 "\"RENWUNO\" TEXT," + // 3: renwuno
                 "\"YANGPINGLB\" TEXT," + // 4: yangpinglb
                 "\"YANGPINGMC\" TEXT," + // 5: yangpingmc
-                "\"GPS\" TEXT," + // 6: gps
-                "\"CAIYANGSHULIANG\" TEXT," + // 7: caiyangshuliang
-                "\"TIME\" TEXT," + // 8: time
-                "\"STROGEMETHOND\" TEXT," + // 9: strogemethond
-                "\"USER\" TEXT," + // 10: user
-                "\"PWD\" TEXT," + // 11: pwd
-                "\"CANDI\" TEXT," + // 12: candi
-                "\"SIGNPATH\" TEXT," + // 13: signpath
-                "\"GIVESIGNPATH\" TEXT," + // 14: givesignpath
-                "\"IMAGES\" TEXT," + // 15: images
-                "\"CSCM\" TEXT," + // 16: cscm
-                "\"TWH\" TEXT," + // 17: twh
-                "\"DETAIL\" TEXT);"); // 18: detail
+                "\"YANGPINGMC2\" TEXT," + // 6: yangpingmc2
+                "\"GPS\" TEXT," + // 7: gps
+                "\"CAIYANGSHULIANG\" TEXT," + // 8: caiyangshuliang
+                "\"TIME\" TEXT," + // 9: time
+                "\"STROGEMETHOND\" TEXT," + // 10: strogemethond
+                "\"USER\" TEXT," + // 11: user
+                "\"PWD\" TEXT," + // 12: pwd
+                "\"CANDI\" TEXT," + // 13: candi
+                "\"SIGNPATH\" TEXT," + // 14: signpath
+                "\"GIVESIGNPATH\" TEXT," + // 15: givesignpath
+                "\"IMAGES\" TEXT," + // 16: images
+                "\"CSCM\" TEXT," + // 17: cscm
+                "\"TWH\" TEXT," + // 18: twh
+                "\"DETAIL\" TEXT);"); // 19: detail
     }
 
     /** Drops the underlying database table. */
@@ -119,69 +121,74 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
             stmt.bindString(6, yangpingmc);
         }
  
+        String yangpingmc2 = entity.getYangpingmc2();
+        if (yangpingmc2 != null) {
+            stmt.bindString(7, yangpingmc2);
+        }
+ 
         String gps = entity.getGps();
         if (gps != null) {
-            stmt.bindString(7, gps);
+            stmt.bindString(8, gps);
         }
  
         String caiyangshuliang = entity.getCaiyangshuliang();
         if (caiyangshuliang != null) {
-            stmt.bindString(8, caiyangshuliang);
+            stmt.bindString(9, caiyangshuliang);
         }
  
         String time = entity.getTime();
         if (time != null) {
-            stmt.bindString(9, time);
+            stmt.bindString(10, time);
         }
  
         String strogemethond = entity.getStrogemethond();
         if (strogemethond != null) {
-            stmt.bindString(10, strogemethond);
+            stmt.bindString(11, strogemethond);
         }
  
         String user = entity.getUser();
         if (user != null) {
-            stmt.bindString(11, user);
+            stmt.bindString(12, user);
         }
  
         String pwd = entity.getPwd();
         if (pwd != null) {
-            stmt.bindString(12, pwd);
+            stmt.bindString(13, pwd);
         }
  
         String candi = entity.getCandi();
         if (candi != null) {
-            stmt.bindString(13, candi);
+            stmt.bindString(14, candi);
         }
  
         String signpath = entity.getSignpath();
         if (signpath != null) {
-            stmt.bindString(14, signpath);
+            stmt.bindString(15, signpath);
         }
  
         String givesignpath = entity.getGivesignpath();
         if (givesignpath != null) {
-            stmt.bindString(15, givesignpath);
+            stmt.bindString(16, givesignpath);
         }
  
         String images = entity.getImages();
         if (images != null) {
-            stmt.bindString(16, images);
+            stmt.bindString(17, images);
         }
  
         String cscm = entity.getCscm();
         if (cscm != null) {
-            stmt.bindString(17, cscm);
+            stmt.bindString(18, cscm);
         }
  
         String twh = entity.getTwh();
         if (twh != null) {
-            stmt.bindString(18, twh);
+            stmt.bindString(19, twh);
         }
  
         String detail = entity.getDetail();
         if (detail != null) {
-            stmt.bindString(19, detail);
+            stmt.bindString(20, detail);
         }
     }
 
@@ -219,69 +226,74 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
             stmt.bindString(6, yangpingmc);
         }
  
+        String yangpingmc2 = entity.getYangpingmc2();
+        if (yangpingmc2 != null) {
+            stmt.bindString(7, yangpingmc2);
+        }
+ 
         String gps = entity.getGps();
         if (gps != null) {
-            stmt.bindString(7, gps);
+            stmt.bindString(8, gps);
         }
  
         String caiyangshuliang = entity.getCaiyangshuliang();
         if (caiyangshuliang != null) {
-            stmt.bindString(8, caiyangshuliang);
+            stmt.bindString(9, caiyangshuliang);
         }
  
         String time = entity.getTime();
         if (time != null) {
-            stmt.bindString(9, time);
+            stmt.bindString(10, time);
         }
  
         String strogemethond = entity.getStrogemethond();
         if (strogemethond != null) {
-            stmt.bindString(10, strogemethond);
+            stmt.bindString(11, strogemethond);
         }
  
         String user = entity.getUser();
         if (user != null) {
-            stmt.bindString(11, user);
+            stmt.bindString(12, user);
         }
  
         String pwd = entity.getPwd();
         if (pwd != null) {
-            stmt.bindString(12, pwd);
+            stmt.bindString(13, pwd);
         }
  
         String candi = entity.getCandi();
         if (candi != null) {
-            stmt.bindString(13, candi);
+            stmt.bindString(14, candi);
         }
  
         String signpath = entity.getSignpath();
         if (signpath != null) {
-            stmt.bindString(14, signpath);
+            stmt.bindString(15, signpath);
         }
  
         String givesignpath = entity.getGivesignpath();
         if (givesignpath != null) {
-            stmt.bindString(15, givesignpath);
+            stmt.bindString(16, givesignpath);
         }
  
         String images = entity.getImages();
         if (images != null) {
-            stmt.bindString(16, images);
+            stmt.bindString(17, images);
         }
  
         String cscm = entity.getCscm();
         if (cscm != null) {
-            stmt.bindString(17, cscm);
+            stmt.bindString(18, cscm);
         }
  
         String twh = entity.getTwh();
         if (twh != null) {
-            stmt.bindString(18, twh);
+            stmt.bindString(19, twh);
         }
  
         String detail = entity.getDetail();
         if (detail != null) {
-            stmt.bindString(19, detail);
+            stmt.bindString(20, detail);
         }
     }
 
@@ -299,19 +311,20 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // renwuno
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // yangpinglb
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // yangpingmc
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // gps
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // caiyangshuliang
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // time
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // strogemethond
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // user
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // pwd
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // candi
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // signpath
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // givesignpath
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // images
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // cscm
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // twh
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // detail
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // yangpingmc2
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // gps
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // caiyangshuliang
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // time
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // strogemethond
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // user
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // pwd
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // candi
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // signpath
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // givesignpath
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // images
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // cscm
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // twh
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19) // detail
         );
         return entity;
     }
@@ -324,19 +337,20 @@ public class SamplingBeanDao extends AbstractDao<SamplingBean, Long> {
         entity.setRenwuno(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setYangpinglb(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setYangpingmc(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setGps(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setCaiyangshuliang(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setTime(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setStrogemethond(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setUser(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setPwd(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setCandi(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setSignpath(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setGivesignpath(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setImages(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setCscm(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setTwh(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setDetail(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setYangpingmc2(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setGps(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setCaiyangshuliang(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setTime(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setStrogemethond(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setUser(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setPwd(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setCandi(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setSignpath(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setGivesignpath(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setImages(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setCscm(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setTwh(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setDetail(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
      }
     
     @Override

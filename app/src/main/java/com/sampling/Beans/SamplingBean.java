@@ -19,6 +19,7 @@ public class SamplingBean {
     String renwuno;
     String yangpinglb;
     String yangpingmc;
+    String yangpingmc2;
     String gps;
     String caiyangshuliang;
     String time;
@@ -32,9 +33,9 @@ public class SamplingBean {
     String cscm;//菜市场名
     String twh;//摊位号
     String detail;//样本详情
-    @Generated(hash = 263429463)
+    @Generated(hash = 12590058)
     public SamplingBean(Long id, String isupload, String caiyanno, String renwuno,
-            String yangpinglb, String yangpingmc, String gps,
+            String yangpinglb, String yangpingmc, String yangpingmc2, String gps,
             String caiyangshuliang, String time, String strogemethond, String user,
             String pwd, String candi, String signpath, String givesignpath,
             String images, String cscm, String twh, String detail) {
@@ -44,6 +45,7 @@ public class SamplingBean {
         this.renwuno = renwuno;
         this.yangpinglb = yangpinglb;
         this.yangpingmc = yangpingmc;
+        this.yangpingmc2 = yangpingmc2;
         this.gps = gps;
         this.caiyangshuliang = caiyangshuliang;
         this.time = time;
@@ -195,5 +197,11 @@ public class SamplingBean {
     }
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+    public String getYangpingmc2() {
+        return this.yangpingmc2;
+    }
+    public void setYangpingmc2(String yangpingmc2) {
+        this.yangpingmc2 = yangpingmc2;
     }
 }
