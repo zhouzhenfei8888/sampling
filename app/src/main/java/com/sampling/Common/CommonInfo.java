@@ -6,6 +6,7 @@ package com.sampling.Common;
 
 public class CommonInfo {
     public static String url = "http://58.215.219.74:8083";
+    public static String url1 = "https://fsplatform.com";
     public static String url2 = "https://fsplatform.com/zodobase";
     public static String getOrderList = url2+"/do/anon.api.GetTaskInfo";
     public static String getSiteInfo= url2+"/do/anon.api.GetSiteInfo";

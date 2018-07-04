@@ -180,14 +180,15 @@ public class MainFrag extends UltimateFragment implements View.OnClickListener, 
     }
 
     private void doDownLoad(String file) {
-        final String downloadurl = CommonInfo.url2 + file;
+        final String downloadurl = CommonInfo.url1 + file;
         Log.d(TAG, "url:::" + downloadurl);
         final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
                 .content("正在下载...")
                 .canceledOnTouchOutside(false)
                 .progress(false, 100,true)
                 .progressNumberFormat("%1d/%2d")
-                .show();
+                .build();
+        dialog.show();
         ProgressManager.getInstance().addResponseListener(downloadurl, new ProgressListener() {
             @Override
             public void onProgress(ProgressInfo progressInfo) {
